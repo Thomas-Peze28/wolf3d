@@ -71,17 +71,9 @@ void draw_floor_and_wall(game_t *game)
     }
 }
 
-static int display_player_angle(game_t *game)
+static int display_player_angle(game_t *game, sfVertex v1, sfVertex v2)
 {
     sfVertexArray *line = sfVertexArray_create();
-    sfVertex v1 = {.position = (sfVector2f){
-        game->player->x * game->map->tile_size + game->map->tile_size / 2,
-        game->player->y * game->map->tile_size + game->map->tile_size / 2},
-        .color = sfBlue};
-    sfVertex v2 = {.position = (sfVector2f){
-        (game->player->x + cos(game->player->angle)) * game->map->tile_size + game->map->tile_size / 2,
-        (game->player->y + sin(game->player->angle)) * game->map->tile_size + game->map->tile_size / 2},
-        .color = sfBlue};
 
     if (!line)
         return 84;
@@ -99,13 +91,16 @@ static int display_player_angle(game_t *game)
 
 int display_player(game_t *game)
 {
-    sfCircleShape *circle = sfCircleShape_create();
-    sfCircleShape_setRadius(circle, game->map->tile_size / 2);
-    sfCircleShape_setOrigin(circle, (sfVector2f){0, 0});
-    sfCircleShape_setFillColor(circle, sfGreen);
-    sfCircleShape_setPosition(circle, (sfVector2f){game->player->x * game->map->tile_size, game->player->y * game->map->tile_size});
-    sfRenderWindow_drawCircleShape(game->window->win, circle, NULL);
-    display_player_angle(game);    
-    sfCircleShape_destroy(circle);
+    sfVertex v1 = {.position = (sfVector2f){
+        game->player->x * game->map->tile_size + game->map->tile_size / 2,
+        game->player->y * game->map->tile_size + game->map->tile_size / 2},
+        .color = sfBlue};
+    sfVertex v2 = {.position = (sfVector2f){
+        (game->player->x + cos(game->player->angle)) * game->map->tile_size +
+        game->map->tile_size / 2, (game->player->y + sin(game->player->angle))
+        * game->map->tile_size + game->map->tile_size / 2}, .color = sfBlue};
+
+    sfRenderWindow_drawCircleShape(game->window->win, game->player->avatar, NULL);
+    display_player_angle(game, v1, v2);
     return 0;
 }

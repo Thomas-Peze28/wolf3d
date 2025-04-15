@@ -25,9 +25,9 @@ void handle_key_pressed(game_t *game)
         if (!is_wall(game->map, game->player->x + 1, game->player->y))
             game->player->x += 1;
     }
-    if (game->window->event.key.code == sfKeyA)
+    if (game->window->event.key.code == sfKeyQ)
         game->player->angle -= 0.1;
-    if (game->window->event.key.code == sfKeyZ)
+    if (game->window->event.key.code == sfKeyD)
         game->player->angle += 0.1;
 }
 
@@ -35,11 +35,12 @@ int analyze_event(game_t *game)
 {
     if (game->window->event.type == sfEvtClosed)
         sfRenderWindow_close(game->window->win);
-    if (game->window->event.type == sfEvtKeyPressed)
-        if (game->window->event.key.code == sfKeyEscape)
+    if (game->window->event.type == sfEvtKeyPressed) {
+        if (game->window->event.key.code == sfKeyEscape) {
             sfRenderWindow_close(game->window->win);
-        else
+        } else
             handle_key_pressed(game);
+    }
     return 0;
 }
 
@@ -54,8 +55,8 @@ int generate_test(game_t *game)
     game->map->map[3][2] = 1;
     game->map->map[5][5] = 1;
     game->map->map[5][6] = 1;
-    print_map(game->map);
-    fmod(game->player->angle, 2 * 3.14159265358979323846);
+    // fmod(game->player->angle, 2 * 3.14159265358979323846);
+    return 0;
 }
 
 int open_window(void)
@@ -73,7 +74,7 @@ int open_window(void)
         //display_floor(game);
         sfRenderWindow_display(game->window->win);
     }
-    sfWindow_destroy(game->window->win);
+    sfRenderWindow_destroy(game->window->win);
     return 0;
 }
 

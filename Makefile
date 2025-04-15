@@ -5,7 +5,10 @@
 ## my_ls
 ##
 
-SRC	=	src/main.c			\
+SRC	=	src/main.c	\
+		src/display.c	\
+		src/handle_collision.c 	\
+		src/init_structs.c
 
 OBJ	=	$(SRC:.c=.o)
 

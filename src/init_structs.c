@@ -15,7 +15,7 @@ game_t *init_game(void)
         return NULL;
     game->window = init_window();
     game->map = init_map();
-    game->player = init_player();
+    game->player = init_player(game->map->tile_size);
     return game;
 }
 
@@ -69,7 +69,7 @@ map_t *init_map(void)
     return map;
 }
 
-player_t *init_player(void)
+player_t *init_player(int tile_size)
 {
     player_t *player = malloc(sizeof(player_t));
 
@@ -78,5 +78,10 @@ player_t *init_player(void)
     player->x = 0;
     player->y = 0;
     player->angle = 0;
+    player->avatar = sfCircleShape_create();
+    sfCircleShape_setRadius(player->avatar, tile_size / 2);
+    sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});
+    sfCircleShape_setFillColor(player->avatar, sfGreen);
+    sfCircleShape_setPosition(player->avatar, (sfVector2f){player->x * tile_size, player->y * tile_size});
     return player;
 }

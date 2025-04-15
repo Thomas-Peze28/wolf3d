@@ -34,6 +34,8 @@ int my_strcmp(char const *s1, char const *s2);
 int open_window(void);
 game_t *init_game(void);
 bool is_wall(map_t *map, int x, int y);
-void display_floor(game_t *game);
+void display_floor_ceilling(game_t *game);
+void draw_floor_and_wall(game_t *game);
+int display_player(game_t *game);
 
 #endif

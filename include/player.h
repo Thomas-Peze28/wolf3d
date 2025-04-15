@@ -14,8 +14,9 @@ typedef struct player_s {
     float x;
     float y;
     float angle;
+    sfCircleShape *avatar;
 } player_t;
 
-player_t *init_player(void);
+player_t *init_player(int tile_size);
 
 #endif
