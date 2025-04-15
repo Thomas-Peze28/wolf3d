@@ -138,6 +138,45 @@ int display_player(game_t *game)
     return 0;
 }
 
+sfVertexArray *create_textured_quad(sfVector2f p1, sfVector2f p2,
+    sfVector2f p3, sfVector2f p4)
+{
+    sfColor color = sfGreen;
+    sfVertexArray *quad = sfVertexArray_create();
+    sfVertex v1 = {.position = p1, .color = color};
+    sfVertex v2 = {.position = p2, .color = color};
+    sfVertex v3 = {.position = p3, .color = color};
+    sfVertex v4 = {.position = p4, .color = color};
+
+    if (!quad)
+        return NULL;
+    sfVertexArray_append(quad, v1);
+    sfVertexArray_append(quad, v2);
+    sfVertexArray_append(quad, v4);
+    sfVertexArray_append(quad, v3);
+    sfVertexArray_setPrimitiveType(quad, sfQuads);
+    return quad;
+}
+
+void display_floor(game_t *game)
+{
+    sfVertexArray *floor = create_textured_quad(
+        (sfVector2f){0, 0},
+        (sfVector2f){game->window->mode.width, 0},
+        (sfVector2f){300, game->window->mode.height / 2 - 100},
+        (sfVector2f){game->window->mode.width - 300, game->window->mode.height / 2 - 100}
+    );
+    sfVertexArray *ceilling = create_textured_quad(
+        (sfVector2f){0, game->window->mode.height},
+        (sfVector2f){game->window->mode.width, game->window->mode.height},
+        (sfVector2f){300, game->window->mode.height / 2 + 100},
+        (sfVector2f){game->window->mode.width - 300, game->window->mode.height / 2 + 100}
+    );
+    sfRenderWindow_drawVertexArray(game->window->win, floor, NULL);
+    sfRenderWindow_drawVertexArray(game->window->win, ceilling, NULL);
+    sfVertexArray_destroy(floor);
+}
+
 int analyze_event(game_t *game)
 {
     if (game->window->event.type == sfEvtClosed)
@@ -164,11 +203,6 @@ int analyze_event(game_t *game)
     }
     return 0;
 }
-
-sfVertexArray 
-
-
-
 
 int open_window(void)
 {
