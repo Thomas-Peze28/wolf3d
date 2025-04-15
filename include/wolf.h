@@ -23,6 +23,7 @@
     #include "window.h"
     #include "map.h"
     #include "player.h"
+    #include "enemy.h"
 
 typedef struct game_s {
     window_t *window;
