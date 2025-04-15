@@ -126,6 +126,34 @@ void draw_floor_and_wall(game_t *game)
     }
 }
 
+int display_player_angle(game_t *game)
+{
+    sfVertexArray *line = sfVertexArray_create();
+    sfVertex v1 = {.position = (sfVector2f){
+        game->player->x * game->map->tile_size + game->map->tile_size / 2,
+        game->player->y * game->map->tile_size + game->map->tile_size / 2},
+        .color = sfBlue};
+    sfVertex v2 = {.position = (sfVector2f){
+        (game->player->x + cos(game->player->angle)) * game->map->tile_size + game->map->tile_size / 2,
+        (game->player->y + sin(game->player->angle)) * game->map->tile_size + game->map->tile_size / 2},
+        .color = sfBlue};
+
+    if (!line)
+        return 84;
+    sfVertexArray_append(line, v1);
+    sfVertexArray_append(line, v2);
+    sfVertexArray_setPrimitiveType(line, sfLines);
+
+    if (is_wall(game->map, game->player->x + cos(game->player->angle),
+        game->player->y + sin(game->player->angle))) {
+        printf("WALL\n");
+    }
+
+    sfRenderWindow_drawVertexArray(game->window->win, line, NULL);
+    sfVertexArray_destroy(line);
+    return 0;
+}
+
 int display_player(game_t *game)
 {
     sfCircleShape *circle = sfCircleShape_create();
@@ -134,6 +162,7 @@ int display_player(game_t *game)
     sfCircleShape_setFillColor(circle, sfGreen);
     sfCircleShape_setPosition(circle, (sfVector2f){game->player->x * game->map->tile_size, game->player->y * game->map->tile_size});
     sfRenderWindow_drawCircleShape(game->window->win, circle, NULL);
+    display_player_angle(game);    
     sfCircleShape_destroy(circle);
     return 0;
 }
@@ -175,6 +204,7 @@ void display_floor(game_t *game)
     sfRenderWindow_drawVertexArray(game->window->win, floor, NULL);
     sfRenderWindow_drawVertexArray(game->window->win, ceilling, NULL);
     sfVertexArray_destroy(floor);
+    sfVertexArray_destroy(ceilling);
 }
 
 int analyze_event(game_t *game)
@@ -200,6 +230,12 @@ int analyze_event(game_t *game)
             if (!is_wall(game->map, game->player->x + 1, game->player->y))
                 game->player->x += 1;
         }
+        if (game->window->event.key.code == sfKeyA) {
+            game->player->angle -= 0.1;
+        }
+        if (game->window->event.key.code == sfKeyZ) {
+            game->player->angle += 0.1;
+        }
     }
     return 0;
 }
@@ -224,16 +260,18 @@ int open_window(void)
     print_map(game->map);
     fmod(game->player->angle, 2 * 3.14159265358979323846);
 
+    sfRenderWindow_setFramerateLimit(game->window->win, 60);
     while (sfRenderWindow_isOpen(game->window->win)) {
         while (sfRenderWindow_pollEvent(game->window->win, &game->window->event)) {
             analyze_event(game);
         }
         sfRenderWindow_clear(game->window->win, sfBlack);
-        //draw_floor_and_wall(game);
-        //display_player(game);
-        display_floor(game);
+        draw_floor_and_wall(game);
+        display_player(game);
+        //display_floor(game);
         sfRenderWindow_display(game->window->win);
     }
+    sfWindow_destroy(game->window->win);
     return 0;
 }
 

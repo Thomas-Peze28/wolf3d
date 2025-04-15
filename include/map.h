@@ -14,7 +14,7 @@
     #define TILE_SIZE 64
     #define MAP_WIDTH 8
     #define MAP_HEIGHT 8
-    #define FOV (M_PI / 3)
+    #define FOV (3.14 / 3)
     #define NUM_RAYS 800
 
 typedef struct map_s {
