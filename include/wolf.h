@@ -5,7 +5,6 @@
 ** wolf.h
 */
 
-
 #ifndef WOLF_H
     #define WOLF_H
     #include <SFML/Graphics/RenderWindow.h>
@@ -33,6 +32,8 @@ typedef struct game_s {
 
 int my_strcmp(char const *s1, char const *s2);
 int open_window(void);
-int is_mouse_on_button(sfSprite *sprite, sfVector2i mouse_pos);
+game_t *init_game(void);
+bool is_wall(map_t *map, int x, int y);
+void display_floor(game_t *game);
 
 #endif

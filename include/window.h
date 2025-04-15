@@ -21,6 +21,6 @@ typedef struct window_s {
 } window_t;
 
 int open_window(void);
-window_t *create_struct(void);
+window_t *init_window(void);
 
 #endif

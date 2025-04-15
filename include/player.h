@@ -16,4 +16,6 @@ typedef struct player_s {
     float angle;
 } player_t;
 
+player_t *init_player(void);
+
 #endif

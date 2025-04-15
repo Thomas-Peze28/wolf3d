@@ -26,4 +26,6 @@ typedef struct map_s {
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
+map_t *init_map(void);
+
 #endif
