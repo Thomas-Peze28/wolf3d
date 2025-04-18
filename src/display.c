@@ -52,13 +52,13 @@ int cast_all_rays(game_t *game)
         game->player->angle = angle;
         line_coord = cast_single_ray(game);
         if (index < NUM_RAYS) {
-            game->player->view_angles[index]->start.x = (game->player->x + 0.5) * TILE_SIZE;
-            game->player->view_angles[index]->start.y = (game->player->y + 0.5) * TILE_SIZE;
-            game->player->view_angles[index]->end.x = line_coord.x;
-            game->player->view_angles[index]->end.y = line_coord.y;
-            modified_vertex = sfVertexArray_getVertex(game->player->view_angles[index]->line, 0);
-            modified_vertex->position = game->player->view_angles[index]->start;
-            modified_vertex = sfVertexArray_getVertex(game->player->view_angles[index]->line, 1);
+            game->player->view_field[index]->start.x = (game->player->x + 0.5) * TILE_SIZE;
+            game->player->view_field[index]->start.y = (game->player->y + 0.5) * TILE_SIZE;
+            game->player->view_field[index]->end.x = line_coord.x;
+            game->player->view_field[index]->end.y = line_coord.y;
+            modified_vertex = sfVertexArray_getVertex(game->player->view_field[index]->line, 0);
+            modified_vertex->position = game->player->view_field[index]->start;
+            modified_vertex = sfVertexArray_getVertex(game->player->view_field[index]->line, 1);
             modified_vertex->position = line_coord;
             index++;
         }
@@ -92,7 +92,7 @@ void print_player_view(player_t *player, window_t *window)
     int i = 0;
 
     while (i < NUM_RAYS) {
-        sfRenderWindow_drawVertexArray(window->win, player->view_angles[i]->line, NULL);
+        sfRenderWindow_drawVertexArray(window->win, player->view_field[i]->line, NULL);
         i++;
     }
 }

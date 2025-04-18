@@ -77,26 +77,26 @@ player_t *init_player(int tile_size)
     sfCircleShape_setFillColor(player->avatar, sfGreen);
     sfCircleShape_setPosition(player->avatar,
         (sfVector2f){player->x * tile_size, player->y * tile_size});
-    player->view_angles = malloc(sizeof(view_angle_t *) * NUM_RAYS);
-    if (!player->view_angles)
+    player->view_field = malloc(sizeof(view_field_t *) * NUM_RAYS);
+    if (!player->view_field)
         return NULL;
     for (int i = 0; i < NUM_RAYS; i++) {
-        player->view_angles[i] = malloc(sizeof(view_angle_t));
-        if (!player->view_angles[i])
+        player->view_field[i] = malloc(sizeof(view_field_t));
+        if (!player->view_field[i])
             return NULL;
-        player->view_angles[i]->line = sfVertexArray_create();
-        sfVertexArray_setPrimitiveType(player->view_angles[i]->line, sfLines);
-        player->view_angles[i]->start = (sfVector2f) {player->x, player->y};
-        player->view_angles[i]->end = (sfVector2f){0, 0};
+        player->view_field[i]->line = sfVertexArray_create();
+        sfVertexArray_setPrimitiveType(player->view_field[i]->line, sfLines);
+        player->view_field[i]->start = (sfVector2f) {player->x, player->y};
+        player->view_field[i]->end = (sfVector2f){0, 0};
         sfVertexArray_append(
-            player->view_angles[i]->line,
-            (sfVertex){.position = player->view_angles[i]->start, .color = sfGreen});
+            player->view_field[i]->line,
+            (sfVertex){.position = player->view_field[i]->start, .color = sfGreen});
         sfVertexArray_append(
-            player->view_angles[i]->line,
-            (sfVertex){.position = player->view_angles[i]->end, .color = sfGreen});
-        player->view_angles[i]->direction = (sfVector2f){0, 0};
-        player->view_angles[i]->angle = 0;
-        player->view_angles[i]->distance = 0;
+            player->view_field[i]->line,
+            (sfVertex){.position = player->view_field[i]->end, .color = sfGreen});
+        player->view_field[i]->direction = (sfVector2f){0, 0};
+        player->view_field[i]->angle = 0;
+        player->view_field[i]->distance = 0;
     }
     return player;
 }
