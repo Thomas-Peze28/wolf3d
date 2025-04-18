@@ -16,7 +16,32 @@ game_t *init_game(void)
     game->window = init_window();
     game->map = init_map();
     game->player = init_player(game->map->tile_size);
+    game->graphics = init_graphics(game);
+    game->map->tiles = create_tiles(game->map->width, game->map->height,
+        game->map->tile_size, game->map->map);
     return game;
+}
+
+graphics_t *init_graphics(game_t *game)
+{
+    graphics_t *graphics = malloc(sizeof(graphics_t));
+
+    if (!graphics)
+        return NULL;
+    graphics->floor = sfRectangleShape_create();
+    graphics->ceilling = sfRectangleShape_create();
+    sfRectangleShape_setFillColor(graphics->floor,
+        sfColor_fromRGB(96, 96, 96));
+    sfRectangleShape_setFillColor(graphics->ceilling,
+        sfColor_fromRGB(64, 64, 64));
+    sfRectangleShape_setSize(graphics->floor,
+        (sfVector2f){game->window->mode.width, game->window->mode.height / 2});
+    sfRectangleShape_setSize(graphics->ceilling,
+        (sfVector2f){game->window->mode.width, game->window->mode.height / 2});
+    sfRectangleShape_setPosition(graphics->floor,
+        (sfVector2f){0, game->window->mode.height / 2});
+    sfRectangleShape_setPosition(graphics->ceilling, (sfVector2f){0, 0});
+    return graphics;
 }
 
 window_t *init_window(void)
@@ -29,44 +54,11 @@ window_t *init_window(void)
     win->event = (sfEvent){0};
     win->mode = (sfVideoMode){0};
     win->mode.bitsPerPixel = 32;
-    win->mode.width = 800;
-    win->mode.height = 600;
-    win->win = sfRenderWindow_create(win->mode, "WOLF", sfResize | sfClose, NULL);
+    win->mode.width = WINDOW_WIDTH;
+    win->mode.height = WINDOW_HEIGHT;
+    win->win = sfRenderWindow_create(win->mode, "WOLF",
+        sfResize | sfClose, NULL);
     return win;
-}
-
-static void wall_map(map_t *map)
-{
-    for (int i = 0; i < map->height; i++) {
-        for (int j = 0; j < map->width; j++) {
-            if (i == 0 || i == map->height - 1 || j == 0 || j == map->width - 1)
-                map->map[i][j] = 1;
-            else
-                map->map[i][j] = 0;
-        }
-    }
-}
-
-map_t *init_map(void)
-{
-    map_t *map = malloc(sizeof(map_t));
-
-    if (!map)
-        return NULL;
-    map->width = MAP_WIDTH;
-    map->height = MAP_HEIGHT;
-    map->tile_size = TILE_SIZE;
-    map->map = malloc(sizeof(int *) * map->height);
-    if (!map->map)
-        return NULL;
-    for (int i = 0; i < map->height; i++)
-        map->map[i] = malloc(sizeof(int) * map->width);
-    for (int i = 0; i < map->height; i++) {
-        for (int j = 0; j < map->width; j++)
-            map->map[i][j] = 0;
-    }
-    wall_map(map);
-    return map;
 }
 
 player_t *init_player(int tile_size)
@@ -78,10 +70,33 @@ player_t *init_player(int tile_size)
     player->x = 0;
     player->y = 0;
     player->angle = 0;
+    player->view_angle = 0;
     player->avatar = sfCircleShape_create();
     sfCircleShape_setRadius(player->avatar, tile_size / 2);
     sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});
     sfCircleShape_setFillColor(player->avatar, sfGreen);
-    sfCircleShape_setPosition(player->avatar, (sfVector2f){player->x * tile_size, player->y * tile_size});
+    sfCircleShape_setPosition(player->avatar,
+        (sfVector2f){player->x * tile_size, player->y * tile_size});
+    player->view_angles = malloc(sizeof(view_angle_t *) * NUM_RAYS);
+    if (!player->view_angles)
+        return NULL;
+    for (int i = 0; i < NUM_RAYS; i++) {
+        player->view_angles[i] = malloc(sizeof(view_angle_t));
+        if (!player->view_angles[i])
+            return NULL;
+        player->view_angles[i]->line = sfVertexArray_create();
+        sfVertexArray_setPrimitiveType(player->view_angles[i]->line, sfLines);
+        player->view_angles[i]->start = (sfVector2f) {player->x, player->y};
+        player->view_angles[i]->end = (sfVector2f){0, 0};
+        sfVertexArray_append(
+            player->view_angles[i]->line,
+            (sfVertex){.position = player->view_angles[i]->start, .color = sfGreen});
+        sfVertexArray_append(
+            player->view_angles[i]->line,
+            (sfVertex){.position = player->view_angles[i]->end, .color = sfGreen});
+        player->view_angles[i]->direction = (sfVector2f){0, 0};
+        player->view_angles[i]->angle = 0;
+        player->view_angles[i]->distance = 0;
+    }
     return player;
 }

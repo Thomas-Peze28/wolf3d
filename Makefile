@@ -8,11 +8,13 @@
 SRC	=	src/main.c	\
 		src/display.c	\
 		src/handle_collision.c 	\
+		src/map/init_map.c 	\
+		src/map/create_tiles.c 	\
 		src/init_structs.c
 
 OBJ	=	$(SRC:.c=.o)
 
-NAME	=	wolf
+NAME	=	wolf3d
 
 CFLAGS = -Wextra -Wall -I ./include/ -l csfml-graphics -l csfml-system \
 	-l csfml-window -l csfml-audio -lm
