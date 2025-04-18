@@ -10,11 +10,28 @@
 
     #include "wolf.h"
 
-typedef struct pokemon_s {
+typedef enum evolution_s {
+    fantominus,
+    spectrum,
+    ectoplasma,
+    mega_ectoplasma
+} evolution_t;
+
+typedef struct fantominus_s {
     float x;
     float y;
-    float angle;
+    int aim;
     int attack;
-} pokemon_t;
+    evolution_t evolution;
+    int shiny;
+} fantominus_t;
+
+typedef struct mimiqui_s {
+    float x;
+    float y;
+    int aim;
+    int attack;
+    int shiny;
+} mimiqui_t;
 
 #endif
