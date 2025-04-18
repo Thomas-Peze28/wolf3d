@@ -11,10 +11,10 @@
     #include "wolf.h"
 
 typedef enum evolution_s {
-    fantominus,
-    spectrum,
-    ectoplasma,
-    mega_ectoplasma
+    FANTOMINUS,
+    SPECTRUM,
+    ECTOPLASMA,
+    MEGA_ECTOPLASMA,
 } evolution_t;
 
 typedef struct fantominus_s {

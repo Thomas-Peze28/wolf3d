@@ -21,7 +21,7 @@ fantominus_t *init_fantominus(fantominus_t *fantominus)
     return fantominus;
 }
 
-fantominus_t **init_fantominus_tab()
+fantominus_t **init_fantominus_tab(void)
 {
     fantominus_t **fantominus_tab = malloc(sizeof(fantominus_t) * 6);
 

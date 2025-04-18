@@ -61,6 +61,35 @@ window_t *init_window(void)
     return win;
 }
 
+static void create_line(player_t *player, int i)
+{
+    sfVertex vertex1 = {.position = player->view_field[i]->start,
+        .color = sfGreen};
+    sfVertex vertex2 = {.position = player->view_field[i]->end,
+        .color = sfGreen};
+
+    sfVertexArray_append(player->view_field[i]->line, vertex1);
+    sfVertexArray_append(player->view_field[i]->line, vertex2);
+}
+
+static player_t *init_view_player(player_t *player)
+{
+    for (int i = 0; i < NUM_RAYS; i++) {
+        player->view_field[i] = malloc(sizeof(view_field_t));
+        if (!player->view_field[i])
+            return NULL;
+        player->view_field[i]->line = sfVertexArray_create();
+        sfVertexArray_setPrimitiveType(player->view_field[i]->line, sfLines);
+        player->view_field[i]->start = (sfVector2f) {player->x, player->y};
+        player->view_field[i]->end = (sfVector2f){0, 0};
+        create_line(player, i);
+        player->view_field[i]->direction = (sfVector2f){0, 0};
+        player->view_field[i]->angle = 0;
+        player->view_field[i]->distance = 0;
+    }
+    return player;
+}
+
 player_t *init_player(int tile_size)
 {
     player_t *player = malloc(sizeof(player_t));
@@ -80,23 +109,6 @@ player_t *init_player(int tile_size)
     player->view_field = malloc(sizeof(view_field_t *) * NUM_RAYS);
     if (!player->view_field)
         return NULL;
-    for (int i = 0; i < NUM_RAYS; i++) {
-        player->view_field[i] = malloc(sizeof(view_field_t));
-        if (!player->view_field[i])
-            return NULL;
-        player->view_field[i]->line = sfVertexArray_create();
-        sfVertexArray_setPrimitiveType(player->view_field[i]->line, sfLines);
-        player->view_field[i]->start = (sfVector2f) {player->x, player->y};
-        player->view_field[i]->end = (sfVector2f){0, 0};
-        sfVertexArray_append(
-            player->view_field[i]->line,
-            (sfVertex){.position = player->view_field[i]->start, .color = sfGreen});
-        sfVertexArray_append(
-            player->view_field[i]->line,
-            (sfVertex){.position = player->view_field[i]->end, .color = sfGreen});
-        player->view_field[i]->direction = (sfVector2f){0, 0};
-        player->view_field[i]->angle = 0;
-        player->view_field[i]->distance = 0;
-    }
+    player = init_view_player(player);
     return player;
 }

@@ -24,7 +24,21 @@ void wall_map(map_t *map)
     }
 }
 
-void fill_map_with_test(map_t *map)
+void fill_rest_of_the_walls(map_t *map)
+{
+    map->map[3][10] = 1;
+    map->map[3][11] = 1;
+    map->map[7][11] = 1;
+    map->map[7][12] = 1;
+    map->map[4][13] = 1;
+    map->map[6][13] = 1;
+    map->map[7][13] = 1;
+    map->map[8][13] = 1;
+    map->map[1][14] = 1;
+    map->map[2][14] = 1;
+}
+
+static void fill_map_with_test(map_t *map)
 {
     map->map[4][2] = 1;
     map->map[1][3] = 1;
@@ -39,16 +53,7 @@ void fill_map_with_test(map_t *map)
     map->map[8][6] = 1;
     map->map[6][8] = 1;
     map->map[3][9] = 1;
-    map->map[3][10] = 1;
-    map->map[3][11] = 1;
-    map->map[7][11] = 1;
-    map->map[7][12] = 1;
-    map->map[4][13] = 1;
-    map->map[6][13] = 1;
-    map->map[7][13] = 1;
-    map->map[8][13] = 1;
-    map->map[1][14] = 1;
-    map->map[2][14] = 1;
+    fill_rest_of_the_walls(map);
 }
 
 map_t *init_map(void)
