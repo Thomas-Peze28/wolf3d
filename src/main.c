@@ -56,7 +56,7 @@ int analyze_event(game_t *game)
 int generate_test(game_t *game)
 {
     game->player->x = 2;
-    game->player->y = 1;
+    game->player->y = 3;
     game->player->angle = 0;
     if (!game || !game->window->win)
         return 84;
@@ -78,6 +78,9 @@ int open_window(void)
             game->graphics->floor, NULL);
         sfRenderWindow_drawRectangleShape(game->window->win,
             game->graphics->ceilling, NULL);
+        cast_all_rays(game);
+        calcuate_rays_dist(game);
+        display_rays_walls(game);
         draw_2d_map(game);
         display_player(game);
         sfRenderWindow_display(game->window->win);

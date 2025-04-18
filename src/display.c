@@ -27,9 +27,10 @@ static sfVector2f cast_single_ray(game_t *game)
     sfVector2f step = {ray_dir.x * 0.1, ray_dir.y * 0.1};
     sfVector2f current_pos = ray_pos;
 
-    while (current_pos.x >= 0 &&
-        current_pos.x < game->map->width * TILE_SIZE && current_pos.y >= 0 &&
-        current_pos.y < game->map->height * TILE_SIZE) {
+    while (current_pos.x >= 0
+        && current_pos.x < game->map->width * TILE_SIZE
+        && current_pos.y >= 0
+        && current_pos.y < game->map->height * TILE_SIZE) {
         if (is_wall(game->map, current_pos.x, current_pos.y))
             return current_pos;
         current_pos.x += step.x;
@@ -59,8 +60,8 @@ int cast_all_rays(game_t *game)
 {
     float original_angle = game->player->angle;
     float start_angle = original_angle - (FOV / 2);
-    float end_angle = original_angle + (FOV / 2);
-    float step = 0.05;
+    float end_angle = original_angle + FOV;
+    float step = 0.01;
     sfVector2f line_coord = {0, 0};
     sfVertex *modified_vertex = NULL;
     int index = 0;

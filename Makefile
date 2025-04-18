@@ -10,7 +10,9 @@ SRC	=	src/main.c	\
 		src/handle_collision.c 	\
 		src/map/init_map.c 	\
 		src/map/create_tiles.c 	\
-		src/init_structs.c
+		src/initialization/init_enemies.c 	\
+		src/initialization/init_structs.c 	\
+		src/display_walls.c 	\
 
 OBJ	=	$(SRC:.c=.o)
 
