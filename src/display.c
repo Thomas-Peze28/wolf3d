@@ -43,7 +43,7 @@ int cast_all_rays(game_t *game)
     float original_angle = game->player->angle;
     float start_angle = original_angle - (FOV / 2);
     float end_angle = original_angle + (FOV / 2);
-    float step = FOV / NUM_RAYS;
+    float step = 0.1;
     sfVector2f line_coord = {0, 0};
     sfVertex *modified_vertex = NULL;
     int index = 0;
@@ -67,26 +67,6 @@ int cast_all_rays(game_t *game)
     return 0;
 }
 
-int display_player_rotation(game_t *game)
-{
-    sfVector2f v1 = {game->player->x * TILE_SIZE + TILE_SIZE / 2, game->player->y * TILE_SIZE + TILE_SIZE / 2};
-    sfVector2f v2 = {game->player->x * TILE_SIZE + TILE_SIZE / 2 + cos(game->player->angle) * 50,
-        game->player->y * TILE_SIZE + TILE_SIZE / 2 + sin(game->player->angle) * 50};
-    sfVertex vertex1 = {.position = v1, .color = sfBlue};
-    sfVertex vertex2 = {.position = v2, .color = sfBlue};
-    sfVertexArray *line = sfVertexArray_create();
-    sfVertex *second_vertex = NULL;
-
-    sfVertexArray_setPrimitiveType(line, sfLines);
-    sfVertexArray_append(line, vertex1);
-    sfVertexArray_append(line, vertex2);
-    second_vertex = sfVertexArray_getVertex(line, 1);
-    second_vertex->position = (sfVector2f){second_vertex->position.x, second_vertex->position.y};
-    sfRenderWindow_drawVertexArray(game->window->win, line, NULL);
-    sfVertexArray_destroy(line);
-    return 0;
-}
-
 void print_player_view(player_t *player, window_t *window)
 {
     int i = 0;
@@ -100,9 +80,8 @@ void print_player_view(player_t *player, window_t *window)
 int display_player(game_t *game)
 {
     sfCircleShape_setPosition(game->player->avatar, (sfVector2f){game->player->x * TILE_SIZE, game->player->y * TILE_SIZE});
-    sfRenderWindow_drawCircleShape(game->window->win, game->player->avatar, NULL);
-    display_player_rotation(game);
     cast_all_rays(game);
     print_player_view(game->player, game->window);
+    sfRenderWindow_drawCircleShape(game->window->win, game->player->avatar, NULL);
     return 0;
 }

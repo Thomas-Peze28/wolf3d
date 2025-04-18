@@ -11,9 +11,9 @@ void set_rectangle_style(tile_t ***tiles, int **map, sfVector2i tupple,
     int tile_size)
 {
     if (map[tupple.x][tupple.y] == 1)
-        tiles[tupple.x][tupple.y]->color = sfColor_fromRGB(255, 0, 0);
+        tiles[tupple.x][tupple.y]->color = sfColor_fromRGB(128, 128, 128);
     else
-        tiles[tupple.x][tupple.y]->color = sfColor_fromRGB(255, 255, 255);
+        tiles[tupple.x][tupple.y]->color = sfColor_fromRGB(192, 192, 192);
     tiles[tupple.x][tupple.y]->is_wall = map[tupple.x][tupple.y];
     sfRectangleShape_setSize(tiles[tupple.x][tupple.y]->tile,
         (sfVector2f){tile_size, tile_size});

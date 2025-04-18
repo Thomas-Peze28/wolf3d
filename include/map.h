@@ -12,9 +12,9 @@
     #include "wolf.h"
 
     #define M_PI 3.14159265358979323846
-    #define TILE_SIZE 64
-    #define MAP_WIDTH 8
-    #define MAP_HEIGHT 8
+    #define TILE_SIZE 30
+    #define MAP_WIDTH 17
+    #define MAP_HEIGHT 11
     #define FOV (M_PI / 3)
     #define NUM_RAYS 500
 

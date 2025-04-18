@@ -74,7 +74,7 @@ player_t *init_player(int tile_size)
     player->avatar = sfCircleShape_create();
     sfCircleShape_setRadius(player->avatar, tile_size / 2);
     sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});
-    sfCircleShape_setFillColor(player->avatar, sfGreen);
+    sfCircleShape_setFillColor(player->avatar, sfRed);
     sfCircleShape_setPosition(player->avatar,
         (sfVector2f){player->x * tile_size, player->y * tile_size});
     player->view_field = malloc(sizeof(view_field_t *) * NUM_RAYS);

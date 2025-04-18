@@ -26,10 +26,29 @@ void wall_map(map_t *map)
 
 void fill_map_with_test(map_t *map)
 {
-    map->map[2][2] = 1;
-    map->map[3][2] = 1;
-    map->map[5][5] = 1;
-    map->map[5][6] = 1;
+    map->map[4][2] = 1;
+    map->map[1][3] = 1;
+    map->map[2][3] = 1;
+    map->map[4][4] = 1;
+    map->map[8][4] = 1;
+    map->map[9][4] = 1;
+    map->map[4][5] = 1;
+    map->map[1][6] = 1;
+    map->map[6][6] = 1;
+    map->map[7][6] = 1;
+    map->map[8][6] = 1;
+    map->map[6][8] = 1;
+    map->map[3][9] = 1;
+    map->map[3][10] = 1;
+    map->map[3][11] = 1;
+    map->map[7][11] = 1;
+    map->map[7][12] = 1;
+    map->map[4][13] = 1;
+    map->map[6][13] = 1;
+    map->map[7][13] = 1;
+    map->map[8][13] = 1;
+    map->map[1][14] = 1;
+    map->map[2][14] = 1;
 }
 
 map_t *init_map(void)
