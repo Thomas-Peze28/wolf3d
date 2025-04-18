@@ -12,6 +12,6 @@ coding*
 .vscode
 test.c
 unit_tests*
-my_world
+wolf3d
 log
 *.pdf
