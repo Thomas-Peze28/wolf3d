@@ -86,6 +86,7 @@ static player_t *init_view_player(player_t *player)
         player->view_field[i]->direction = (sfVector2f){0, 0};
         player->view_field[i]->angle = 0;
         player->view_field[i]->distance = 0;
+        player->view_field[i]->wall = sfRectangleShape_create();
     }
     return player;
 }

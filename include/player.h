@@ -17,6 +17,7 @@ typedef struct view_field_s {
     sfVector2f direction;
     float angle;
     float distance;
+    sfRectangleShape *wall;
 } view_field_t;
 
 typedef struct player_s {
@@ -31,4 +32,4 @@ typedef struct player_s {
 
 player_t *init_player(int tile_size);
 
-#endif
+#endif /* PLAYER_H */
