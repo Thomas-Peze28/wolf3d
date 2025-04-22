@@ -21,10 +21,11 @@ void draw_2d_map(game_t *game)
 
 static sfVector2f cast_single_ray(game_t *game)
 {
-    sfVector2f ray_dir = {cos(game->player->angle), sin(game->player->angle)};
+    sfVector2f ray_dir = {cosf(game->player->angle)
+        , sinf(game->player->angle)};
     sfVector2f ray_pos = {(game->player->x + 0.5) * TILE_SIZE,
         (game->player->y + 0.5) * TILE_SIZE};
-    sfVector2f step = {ray_dir.x * 0.1, ray_dir.y * 0.1};
+    sfVector2f step = {ray_dir.x * TILE_SIZE / 10, ray_dir.y * TILE_SIZE / 10};
     sfVector2f current_pos = ray_pos;
 
     while (current_pos.x >= 0
@@ -61,7 +62,7 @@ int cast_all_rays(game_t *game)
     float original_angle = game->player->angle;
     float start_angle = original_angle - (FOV / 2);
     float end_angle = original_angle + FOV;
-    float step = 0.01;
+    float step = FOV / NUM_RAYS;
     sfVector2f line_coord = {0, 0};
     sfVertex *modified_vertex = NULL;
     int index = 0;
@@ -94,7 +95,6 @@ int display_player(game_t *game)
     sfCircleShape_setPosition(game->player->avatar,
         (sfVector2f){game->player->x * TILE_SIZE,
         game->player->y * TILE_SIZE});
-    cast_all_rays(game);
     print_player_view(game->player, game->window);
     sfRenderWindow_drawCircleShape(game->window->win,
         game->player->avatar, NULL);
