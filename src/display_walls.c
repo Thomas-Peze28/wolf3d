@@ -22,21 +22,6 @@ sfColor calculate_wall_color(float dist, sfColor base_color)
     return color;
 }
 
-int calcuate_rays_dist(game_t *game)
-{
-    float dist = 0;
-    sfVector2f start = {0, 0};
-    sfVector2f end = {0, 0};
-
-    for (int index = 0; index < NUM_RAYS; index++) {
-        start = game->player->view_field[index]->start;
-        end = game->player->view_field[index]->end;
-        dist = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
-        game->player->view_field[index]->distance = dist;
-    }
-    return 0;
-}
-
 void create_wall(game_t *game, int i, float dist, float wall_height)
 {
     float wall_width = (float)WINDOW_WIDTH / NUM_RAYS;

@@ -12,7 +12,9 @@ SRC	=	src/main.c	\
 		src/map/create_tiles.c 	\
 		src/initialization/init_enemies.c 	\
 		src/initialization/init_structs.c 	\
-		src/display_walls.c 	\
+		src/display_walls.c \
+		src/rays/cast_rays.c \
+		src/game_loop.c \
 
 OBJ	=	$(SRC:.c=.o)
 

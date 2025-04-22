@@ -79,17 +79,7 @@ int open_window(void)
             &game->window->event))
             analyze_event(game);
         if (seconds > 0.001) {
-            sfRenderWindow_clear(game->window->win, sfBlack);
-            sfRenderWindow_drawRectangleShape(game->window->win,
-                game->graphics->floor, NULL);
-            sfRenderWindow_drawRectangleShape(game->window->win,
-                game->graphics->ceilling, NULL);
-            cast_all_rays(game);
-            calcuate_rays_dist(game);
-            display_rays_walls(game);
-            draw_2d_map(game);
-            display_player(game);
-            sfRenderWindow_display(game->window->win);
+            game_loop(game);
             sfClock_restart(clock);
         }
     }

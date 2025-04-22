@@ -46,4 +46,9 @@ int cast_all_rays(game_t *game);
 int calcuate_rays_dist(game_t *game);
 void display_rays_walls(game_t *game);
 
+int game_loop(game_t *game);
+int manage_rays(game_t *game);
+int draw_minimap(game_t *game);
+int draw_ceilling_floor(game_t *game);
+
 #endif
