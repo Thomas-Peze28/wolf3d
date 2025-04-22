@@ -25,7 +25,7 @@ static sfVector2f cast_single_ray(game_t *game)
         , sinf(game->player->angle)};
     sfVector2f ray_pos = {(game->player->x + 0.5) * TILE_SIZE,
         (game->player->y + 0.5) * TILE_SIZE};
-    sfVector2f step = {ray_dir.x * TILE_SIZE / 10, ray_dir.y * TILE_SIZE / 10};
+    sfVector2f step = {ray_dir.x * TILE_SIZE / 50, ray_dir.y * TILE_SIZE / 50};
     sfVector2f current_pos = ray_pos;
 
     while (current_pos.x >= 0
@@ -71,6 +71,7 @@ int cast_all_rays(game_t *game)
         game->player->angle = angle;
         line_coord = cast_single_ray(game);
         if (index < NUM_RAYS) {
+            game->player->view_field[index]->angle = angle;
             project_rays(game, index, line_coord, modified_vertex);
             index++;
         }

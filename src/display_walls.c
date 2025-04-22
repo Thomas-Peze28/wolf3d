@@ -24,7 +24,8 @@ int calcuate_rays_dist(game_t *game)
 
 void create_wall(game_t *game, int i, float dist, float wall_height)
 {
-    sfVector2f size = {1, wall_height};
+    float wall_width = (float)WINDOW_WIDTH / NUM_RAYS;
+    sfVector2f size = {wall_width, wall_height};
     sfVector2f position = {i * (game->window->mode.width / NUM_RAYS),
         (game->window->mode.height - wall_height) / 2};
     sfColor color = sfColor_fromRGB(150 - dist, 75, 0);
@@ -42,12 +43,12 @@ void display_rays_walls(game_t *game)
     float corrected_dist = 0;
     float wall_height = 0;
 
-    for (int i = 0; i < 1920; i++) {
+    for (int i = 0; i < NUM_RAYS; i++) {
         if (game->player->view_field[i]->distance == 0)
             continue;
         dist = game->player->view_field[i]->distance;
-        corrected_dist = dist * cos(game->player->angle
-            - game->player->view_field[i]->angle);
+        corrected_dist = dist *
+            cosf(game->player->angle - game->player->view_field[i]->angle);
         wall_height = (TILE_SIZE / corrected_dist) * (WINDOW_WIDTH / 2);
         create_wall(game, i, corrected_dist, wall_height);
     }

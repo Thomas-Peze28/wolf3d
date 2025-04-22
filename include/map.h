@@ -16,7 +16,7 @@
     #define MAP_WIDTH 17
     #define MAP_HEIGHT 11
     #define FOV (M_PI / 3)
-    #define NUM_RAYS 1920
+    #define NUM_RAYS 320
 
 typedef struct tile_s {
     sfRectangleShape *tile;

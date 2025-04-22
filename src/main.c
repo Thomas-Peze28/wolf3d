@@ -78,7 +78,7 @@ int open_window(void)
         while (sfRenderWindow_pollEvent(game->window->win,
             &game->window->event))
             analyze_event(game);
-        if (seconds > 0.01) {
+        if (seconds > 0.001) {
             sfRenderWindow_clear(game->window->win, sfBlack);
             sfRenderWindow_drawRectangleShape(game->window->win,
                 game->graphics->floor, NULL);
