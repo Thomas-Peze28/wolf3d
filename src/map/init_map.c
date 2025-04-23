@@ -7,53 +7,35 @@
 
 #include "wolf.h"
 
-void make_wall(map_t *map, int i, int j)
+static int fill_map_line(char *buffer, int **map, int line)
 {
-    if (i == 0 || i == map->height - 1 || j == 0 || j == map->width - 1)
-        map->map[i][j] = 1;
-    else
-        map->map[i][j] = 0;
-}
+    int j = 0;
 
-void wall_map(map_t *map)
-{
-    for (int i = 0; i < map->height; i++) {
-        for (int j = 0; j < map->width; j++) {
-            make_wall(map, i, j);
-        }
+    while (j < MAP_WIDTH) {
+        printf("%d\n", buffer[j]);
+        map[line][j] = buffer[j] - '0';
+        j++;
     }
+    return 0;
 }
 
-void fill_rest_of_the_walls(map_t *map)
+static int file_to_map(char *filepath, int **map)
 {
-    map->map[3][10] = 1;
-    map->map[3][11] = 1;
-    map->map[7][11] = 1;
-    map->map[7][12] = 1;
-    map->map[4][13] = 1;
-    map->map[6][13] = 1;
-    map->map[7][13] = 1;
-    map->map[8][13] = 1;
-    map->map[1][14] = 1;
-    map->map[2][14] = 1;
-}
+    FILE *file = fopen(filepath, "r");
+    char *buffer = malloc(sizeof(char) * MAP_WIDTH);
+    size_t len = 0;
+    int line = 0;
 
-static void fill_map_with_test(map_t *map)
-{
-    map->map[4][2] = 1;
-    map->map[1][3] = 1;
-    map->map[2][3] = 1;
-    map->map[4][4] = 1;
-    map->map[8][4] = 1;
-    map->map[9][4] = 1;
-    map->map[4][5] = 1;
-    map->map[1][6] = 1;
-    map->map[6][6] = 1;
-    map->map[7][6] = 1;
-    map->map[8][6] = 1;
-    map->map[6][8] = 1;
-    map->map[3][9] = 1;
-    fill_rest_of_the_walls(map);
+    if (!file)
+        return -1;
+    while (getline(&buffer, &len, file) != -1) {
+        printf("%s", buffer);
+        fill_map_line(buffer, map, line);
+        line++;
+    }
+    free(buffer);
+    fclose(file);
+    return 0;
 }
 
 map_t *init_map(void)
@@ -73,8 +55,7 @@ map_t *init_map(void)
     for (int i = 0; i < map->height; i++)
         for (int j = 0; j < map->width; j++)
             map->map[i][j] = 0;
-    wall_map(map);
-    fill_map_with_test(map);
+    file_to_map("map.txt", map->map);
     map->tiles = create_tiles(map->width, map->height,
         map->tile_size, map->map);
     return map;
