@@ -11,27 +11,30 @@
     #include "wolf.h"
 
 typedef enum evolution_s {
-    FANTOMINUS,
-    SPECTRUM,
-    ECTOPLASMA,
-    MEGA_ECTOPLASMA,
+    GASTLY,
+    HAUNTER,
+    GENGAR,
+    MEGA_GENGAR,
 } evolution_t;
 
-typedef struct fantominus_s {
+typedef struct gastly_s {
     float x;
     float y;
     int aim;
     int attack;
     evolution_t evolution;
     int shiny;
-} fantominus_t;
+} gastly_t;
 
-typedef struct mimiqui_s {
+typedef struct mimikyu_s {
     float x;
     float y;
     int aim;
     int attack;
     int shiny;
-} mimiqui_t;
+} mimikyu_t;
+
+mimikyu_t **init_mimikyu_tab(int level);
+gastly_t **init_gastly_tab(int level);
 
 #endif

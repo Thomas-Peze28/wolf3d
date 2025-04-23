@@ -27,6 +27,7 @@
     #include "graphics.h"
 
 typedef struct game_s {
+    int level;
     window_t *window;
     map_t *map;
     player_t *player;

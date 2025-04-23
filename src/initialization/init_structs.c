@@ -13,6 +13,7 @@ game_t *init_game(void)
 
     if (!game)
         return NULL;
+    game->level = 1;
     game->window = init_window();
     game->map = init_map();
     game->player = init_player(game->map->tile_size);

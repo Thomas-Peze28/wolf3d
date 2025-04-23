@@ -10,23 +10,43 @@
 
 // if shiny is catched then life stat++
 
-fantominus_t *init_fantominus(fantominus_t *fantominus)
+gastly_t *init_gastly(gastly_t *gastly)
 {
-    fantominus->evolution = rand() / 4;
-    fantominus->attack = ((rand() / 5) + 1) * fantominus->evolution;
-    fantominus->aim = 250 + (25 * fantominus->evolution);
-    fantominus->shiny = (rand() / 10);
-    fantominus->x = (rand() / MAP_WIDTH);
-    fantominus->y = (rand() / MAP_HEIGHT);
-    return fantominus;
+    gastly->evolution = GASTLY;
+    gastly->attack = 5 + ((rand() / 5) + 1) * gastly->evolution;
+    gastly->aim = 250 + (25 * gastly->evolution);
+    gastly->shiny = (rand() / 10);
+    gastly->x = (rand() / MAP_WIDTH);
+    gastly->y = (rand() / MAP_HEIGHT);
+    return gastly;
 }
 
-fantominus_t **init_fantominus_tab(void)
+gastly_t **init_gastly_tab(int level)
 {
-    fantominus_t **fantominus_tab = malloc(sizeof(fantominus_t) * 6);
+    gastly_t **gastly_tab = malloc(sizeof(gastly_t) * (6 + (level * 3)));
 
     for (int i = 0; i < 5; i++)
-        fantominus_tab[i] = init_fantominus(fantominus_tab[i]);
-    fantominus_tab[5] = NULL;
-    return fantominus_tab;
+        gastly_tab[i] = init_gastly(gastly_tab[i]);
+    gastly_tab[5] = NULL;
+    return gastly_tab;
+}
+
+mimikyu_t *init_mimikyu(mimikyu_t *mimikyu)
+{
+    mimikyu->attack = 10;
+    mimikyu->aim = 250;
+    mimikyu->shiny = (rand() / 10);
+    mimikyu->x = (rand() / MAP_WIDTH);
+    mimikyu->y = (rand() / MAP_HEIGHT);
+    return mimikyu;
+}
+
+mimikyu_t **init_mimikyu_tab(int level)
+{
+    mimikyu_t **mimikyu_tab = malloc(sizeof(mimikyu_t) * (2 + level));
+
+    for (int i = 0; i < 5; i++)
+        mimikyu_tab[i] = init_mimikyu(mimikyu_tab[i]);
+    mimikyu_tab[5] = NULL;
+    return mimikyu_tab;
 }
