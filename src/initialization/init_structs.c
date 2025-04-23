@@ -59,6 +59,7 @@ window_t *init_window(void)
     win->mode.height = WINDOW_HEIGHT;
     win->win = sfRenderWindow_create(win->mode, "WOLF",
         sfResize | sfClose, NULL);
+    sfRenderWindow_setFramerateLimit(win->win, 60);
     return win;
 }
 
@@ -102,6 +103,7 @@ player_t *init_player(int tile_size)
     player->y = 0;
     player->angle = 0;
     player->view_angle = 0;
+    player->speed = 1.0;
     player->avatar = sfCircleShape_create();
     sfCircleShape_setRadius(player->avatar, tile_size / 2);
     sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});

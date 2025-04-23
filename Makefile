@@ -14,7 +14,9 @@ SRC	=	src/main.c	\
 		src/initialization/init_structs.c	\
 		src/display_walls.c \
 		src/rays/cast_rays.c \
-		src/game_loop.c
+		src/game_loop.c	\
+		src/print_fps.c	\
+		src/move_player.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -27,6 +29,11 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS)
+
+opti:	$(OBJ)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) -pg
+	timeout 5 ./$(NAME)
+	gprof ./$(NAME) gmon.out > profile.txt
 
 clean:
 	rm -f $(OBJ)

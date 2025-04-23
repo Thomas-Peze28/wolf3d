@@ -12,12 +12,11 @@
     #include "wolf.h"
 
     #define M_PI 3.14159265358979323846
-    #define TILE_SIZE 30
-    #define MAP_WIDTH 17
-    #define MAP_HEIGHT 11
+    #define MAP_WIDTH 50
+    #define MAP_HEIGHT 50
+    #define TILE_SIZE (300 / MAP_WIDTH)
     #define FOV (M_PI / 3)
-    #define NUM_RAYS 160
-
+    #define NUM_RAYS 1920
 typedef struct tile_s {
     sfRectangleShape *tile;
     sfVector2f pos;

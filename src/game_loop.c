@@ -17,6 +17,7 @@ int manage_rays(game_t *game)
 
 int draw_minimap(game_t *game)
 {
+    print_framerate();
     draw_2d_map(game);
     display_player(game);
     return 0;

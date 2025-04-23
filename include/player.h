@@ -26,6 +26,7 @@ typedef struct player_s {
     float angle;
     float view_angle;
     int aim;
+    float speed;
     sfCircleShape *avatar;
     view_field_t **view_field;
 } player_t;

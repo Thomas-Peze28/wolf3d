@@ -12,7 +12,8 @@ sfVector2f cast_single_ray(game_t *game)
     sfVector2f ray_dir = {cosf(game->player->angle)
         , sinf(game->player->angle)};
     sfVector2f ray_pos = {(game->player->x), (game->player->y)};
-    sfVector2f step = {ray_dir.x * TILE_SIZE / 50, ray_dir.y * TILE_SIZE / 50};
+    sfVector2f step = {ray_dir.x * TILE_SIZE / 100,
+        ray_dir.y * TILE_SIZE / 100};
     sfVector2f current_pos = ray_pos;
 
     while (current_pos.x >= 0

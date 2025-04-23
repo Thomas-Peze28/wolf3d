@@ -9,7 +9,7 @@
 
 sfColor calculate_wall_color(float dist, sfColor base_color)
 {
-    float max_distance = 400.0f;
+    float max_distance = 150.0f;
     float factor = 1.0 - (dist / max_distance);
     sfColor color = base_color;
 

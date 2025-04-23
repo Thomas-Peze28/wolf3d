@@ -51,5 +51,8 @@ int game_loop(game_t *game);
 int manage_rays(game_t *game);
 int draw_minimap(game_t *game);
 int draw_ceilling_floor(game_t *game);
+void print_framerate(void);
+
+void handle_player_movement(game_t *game, player_t *player, map_t *map);
 
 #endif
