@@ -33,8 +33,10 @@ static void print_player_view(player_t *player, window_t *window)
 int display_player(game_t *game)
 {
     sfCircleShape_setPosition(game->player->avatar,
-        (sfVector2f){game->player->x * TILE_SIZE,
-        game->player->y * TILE_SIZE});
+        (sfVector2f){game->player->x, game->player->y});
+    sfCircleShape_setOrigin(game->player->avatar,
+        (sfVector2f){TILE_SIZE / 2,
+        TILE_SIZE / 2});
     print_player_view(game->player, game->window);
     sfRenderWindow_drawCircleShape(game->window->win,
         game->player->avatar, NULL);

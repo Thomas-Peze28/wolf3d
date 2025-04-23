@@ -11,8 +11,7 @@ sfVector2f cast_single_ray(game_t *game)
 {
     sfVector2f ray_dir = {cosf(game->player->angle)
         , sinf(game->player->angle)};
-    sfVector2f ray_pos = {(game->player->x + 0.5) * TILE_SIZE,
-        (game->player->y + 0.5) * TILE_SIZE};
+    sfVector2f ray_pos = {(game->player->x), (game->player->y)};
     sfVector2f step = {ray_dir.x * TILE_SIZE / 50, ray_dir.y * TILE_SIZE / 50};
     sfVector2f current_pos = ray_pos;
 
@@ -32,9 +31,9 @@ void project_rays(game_t *game, int index, sfVector2f line_coord,
     sfVertex *modified_vertex)
 {
     game->player->view_field[index]->start.x =
-        (game->player->x + 0.5) * TILE_SIZE;
+        (game->player->x);
     game->player->view_field[index]->start.y =
-        (game->player->y + 0.5) * TILE_SIZE;
+        (game->player->y);
     game->player->view_field[index]->end.x = line_coord.x;
     game->player->view_field[index]->end.y = line_coord.y;
     modified_vertex =
