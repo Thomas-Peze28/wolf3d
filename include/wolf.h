@@ -46,6 +46,8 @@ void draw_2d_map(game_t *game);
 int cast_all_rays(game_t *game);
 int calcuate_rays_dist(game_t *game);
 void display_rays_walls(game_t *game);
+int analyze_event(game_t *game);
+void handle_key_pressed(game_t *game);
 
 int game_loop(game_t *game);
 int manage_rays(game_t *game);

@@ -14,6 +14,8 @@
 typedef struct graphics_s {
     sfRectangleShape *floor;
     sfRectangleShape *ceilling;
+    sfSprite *wall_sprite;
+    sfTexture *wall_texture;
 } graphics_t;
 
 #endif /* GRAPHICS_H */

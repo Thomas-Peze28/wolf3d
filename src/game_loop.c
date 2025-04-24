@@ -34,6 +34,7 @@ int draw_ceilling_floor(game_t *game)
 
 int game_loop(game_t *game)
 {
+    handle_key_pressed(game);
     sfRenderWindow_clear(game->window->win, sfBlack);
     draw_ceilling_floor(game);
     manage_rays(game);

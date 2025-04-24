@@ -12,6 +12,9 @@ SRC	=	src/main.c	\
 		src/map/create_tiles.c	\
 		src/initialization/init_enemies.c	\
 		src/initialization/init_structs.c	\
+		src/initialization/init_window.c	\
+		src/initialization/init_player.c	\
+		src/initialization/init_graphics.c	\
 		src/display_walls.c \
 		src/rays/cast_rays.c \
 		src/game_loop.c	\

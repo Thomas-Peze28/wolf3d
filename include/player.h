@@ -18,6 +18,8 @@ typedef struct view_field_s {
     float angle;
     float distance;
     sfRectangleShape *wall;
+    sfTexture *wall_texture;
+    sfSprite *wall_sprite;
 } view_field_t;
 
 typedef struct player_s {

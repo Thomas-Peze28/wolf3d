@@ -10,22 +10,16 @@
 void handle_key_pressed(game_t *game)
 {
     handle_player_movement(game, game->player, game->map);
-    if (game->window->event.key.code == sfKeyLeft)
-        game->player->angle -= 0.1;
-    if (game->window->event.key.code == sfKeyRight)
-        game->player->angle += 0.1;
+    if (sfKeyboard_isKeyPressed(sfKeyLeft))
+        game->player->angle -= 0.05;
+    if (sfKeyboard_isKeyPressed(sfKeyRight))
+        game->player->angle += 0.05;
 }
 
 int analyze_event(game_t *game)
 {
     if (game->window->event.type == sfEvtClosed)
         sfRenderWindow_close(game->window->win);
-    if (game->window->event.type == sfEvtKeyPressed) {
-        if (game->window->event.key.code == sfKeyEscape) {
-            sfRenderWindow_close(game->window->win);
-        } else
-            handle_key_pressed(game);
-    }
     return 0;
 }
 
