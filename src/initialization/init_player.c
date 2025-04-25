@@ -47,7 +47,7 @@ player_t *init_player(int tile_size)
     player->y = 0;
     player->angle = 0;
     player->view_angle = 0;
-    player->speed = 0.5;
+    player->speed = 0.2;
     player->avatar = sfCircleShape_create();
     sfCircleShape_setRadius(player->avatar, tile_size / 2);
     sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});

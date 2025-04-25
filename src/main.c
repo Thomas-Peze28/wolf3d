@@ -11,9 +11,9 @@ void handle_key_pressed(game_t *game)
 {
     handle_player_movement(game, game->player, game->map);
     if (sfKeyboard_isKeyPressed(sfKeyLeft))
-        game->player->angle -= 0.05;
+        game->player->angle -= 0.02;
     if (sfKeyboard_isKeyPressed(sfKeyRight))
-        game->player->angle += 0.05;
+        game->player->angle += 0.02;
 }
 
 int analyze_event(game_t *game)
