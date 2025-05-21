@@ -16,11 +16,12 @@ void handle_key_pressed(game_t *game)
         game->player->angle += 0.02;
 }
 
-int analyze_event(game_t *game)
+int analyze_event(game_t *game, int *shoot)
 {
     sfContextSettings settings = {0};
 
-    if (game->window->event.type == sfEvtClosed)
+    if (game->window->event.type == sfEvtClosed ||
+        sfKeyboard_isKeyPressed(sfKeyEscape))
         sfRenderWindow_close(game->window->win);
     if (game->window->event.type == sfEvtKeyPressed
         && game->window->event.key.code == sfKeyF11) {
@@ -36,6 +37,12 @@ int analyze_event(game_t *game)
     }
     if (is_key_pressed(game->window->event, sfKeyEscape))
         display_menu(game);
+    if (game->window->event.type == sfEvtMouseMoved)
+        sfSprite_setPosition(game->graphics->cursor,
+        (sfVector2f){game->window->event.mouseMove.x,
+        game->window->event.mouseMove.y});
+    if (game->window->event.type == sfEvtMouseButtonPressed)
+        *shoot = 1;
     return 0;
 }
 
@@ -49,15 +56,21 @@ int generate_test(game_t *game)
     return 0;
 }
 
-int open_window(void)
+int launch_game(void)
 {
     sfClock *clock = sfClock_create();
     sfTime time_clock = {0};
     float seconds = 0.0;
     game_t *game = init_game();
+    sfIntRect rect = {0, 0, 64, 64};
+    sfIntRect hud_rect = {0, 0, 185, 192};
+    int shoot = 0;
+    int nb_frame_ball = 0;
+    int nb_frame_gun = 0;
     gastly_t **gastly_tab = init_gastly_tab(3, game->map->map);
     mimikyu_t **mimikyu_tab = init_mimikyu_tab(3, game->map->map);
 
+    sfRenderWindow_setMouseCursorVisible(game->window->win, sfFalse);
     display_menu(game);
     generate_test(game);
     while (sfRenderWindow_isOpen(game->window->win)) {
@@ -65,9 +78,10 @@ int open_window(void)
         seconds = sfTime_asSeconds(time_clock);
         while (sfRenderWindow_pollEvent(game->window->win,
             &game->window->event))
-            analyze_event(game);
+            analyze_event(game, &shoot);
         if (seconds > 0.01) {
-            game_loop(game);
+            game_loop(game, &shoot, &nb_frame_ball, &nb_frame_gun, &rect,
+                &hud_rect);
             display_ennemies(gastly_tab, mimikyu_tab, game);
             sfRenderWindow_display(game->window->win);
             sfClock_restart(clock);
@@ -77,11 +91,17 @@ int open_window(void)
     return 0;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
-    if (getenv("DISPLAY") == NULL)
+    // -h
+    (void)argc;
+    if (!env || !env[0] || !getenv("DISPLAY"))
         return 84;
+    if (argv[1] && argv[1][0] == '-' && argv[1][1] == 'h') {
+        printf("USAGE :\n\t./wolf3d (-h)\n\nDESCRIPTION :\n");
+        return 0;
+    }
     srand(time(NULL));
-    open_window();
+    launch_game();
     return 0;
 }
