@@ -16,7 +16,7 @@
     #define MAP_HEIGHT 50
     #define TILE_SIZE (300 / MAP_WIDTH)
     #define FOV (M_PI / 3)
-    #define NUM_RAYS 1920
+    #define NUM_RAYS 480
 typedef struct tile_s {
     sfRectangleShape *tile;
     sfVector2f pos;
@@ -30,6 +30,7 @@ typedef struct map_s {
     int tile_size;
     int **map;
     tile_t ***tiles;
+    float wall_dist[WINDOW_WIDTH];
 } map_t;
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];

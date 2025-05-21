@@ -19,12 +19,16 @@
     #include <stdio.h>
     #include <stdbool.h>
     #include <math.h>
+    #include <time.h>
 
     #include "window.h"
     #include "map.h"
     #include "player.h"
     #include "enemy.h"
     #include "graphics.h"
+
+    #define OPTION_MENU game->graphics->menu->options_menu
+    #define MAIN_MENU game->graphics->menu->main_menu
 
 typedef struct game_s {
     int level;
@@ -49,6 +53,11 @@ void display_rays_walls(game_t *game);
 int analyze_event(game_t *game);
 void handle_key_pressed(game_t *game);
 
+int is_button_clicked_rect(sfFloatRect rect, sfVector2i mouse);
+bool is_key_pressed(sfEvent event, sfKeyCode key);
+bool is_mouse_clicked(sfEvent event, sfMouseButton button);
+int is_button_clicked(sfSprite *sprite, sfEvent event);
+
 int game_loop(game_t *game);
 int manage_rays(game_t *game);
 int draw_minimap(game_t *game);
@@ -56,5 +65,20 @@ int draw_ceilling_floor(game_t *game);
 void print_framerate(void);
 
 void handle_player_movement(game_t *game, player_t *player, map_t *map);
+void move_rect(sfIntRect *rect, int offset, int max_value);
+float normalize_angle(float angle);
 
-#endif
+void display_gastly(game_t *game, gastly_t *gastly);
+void display_mimikyu(game_t *game, mimikyu_t *mimikyu);
+int display_ennemies(gastly_t **gastly_tab, mimikyu_t **mimikyu_tab,
+    game_t *game);
+void update_gastly_anim(gastly_t *gastly);
+void update_mimikyu_anim(mimikyu_t *mimikyu);
+
+int display_menu(game_t *game);
+void display_fps(game_t *game);
+menu_t *init_menu(void);
+int display_options_menu(game_t *game);
+menu_t *init_menu(void);
+
+#endif /* WOLF_H */

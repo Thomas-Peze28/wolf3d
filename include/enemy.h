@@ -24,6 +24,11 @@ typedef struct gastly_s {
     int attack;
     evolution_t evolution;
     int shiny;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfIntRect rect;
+    int nb_frame;
+    int frame;
 } gastly_t;
 
 typedef struct mimikyu_s {
@@ -32,9 +37,23 @@ typedef struct mimikyu_s {
     int aim;
     int attack;
     int shiny;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfIntRect rect;
+    int nb_frame;
+    int frame;
 } mimikyu_t;
 
-mimikyu_t **init_mimikyu_tab(int level);
-gastly_t **init_gastly_tab(int level);
+typedef struct pokemon_s {
+    gastly_t **gastly;
+    mimikyu_t **mimikyu;
+} pokemon_t;
+
+void set_mimukyu(mimikyu_t *mimikyu, int **map);
+void set_gastly(gastly_t *gastly, int **map);
+mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map);
+gastly_t *init_gastly(gastly_t *gastly, int **map);
+mimikyu_t **init_mimikyu_tab(int level, int **map);
+gastly_t **init_gastly_tab(int level, int **map);
 
 #endif

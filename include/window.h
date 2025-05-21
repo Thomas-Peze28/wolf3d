@@ -18,9 +18,11 @@ typedef struct window_s {
     sfRenderWindow *win;
     sfEvent event;
     sfVideoMode mode;
+    sfUint32 style;
+    bool is_fullscreen;
 } window_t;
 
 int open_window(void);
-window_t *init_window(void);
+window_t *init_window(sfUint32 style);
 
 #endif
