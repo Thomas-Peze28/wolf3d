@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** day_13
+** init_graphics
 ** File description:
 ** main
 */
@@ -34,6 +34,51 @@ void init_wall(graphics_t *graphics)
     sfSprite_setTextureRect(graphics->wall_sprite, graphics->wall_rect);
 }
 
+// static void init_mob_textures(mobs_t *textures)
+// {
+//     textures->shiny_mega_gengar =
+//         sfTexture_createFromFile("assets/shiny/mega_gengar_shiny.png", NULL);
+//     textures->shiny_haunter =
+//         sfTexture_createFromFile("assets/shiny/haunter_shiny.png", NULL);
+//     textures->shiny_mimikyu =
+//         sfTexture_createFromFile("assets/shiny/mimikyu_shiny.png", NULL);
+//     textures->shiny_gastly =
+//         sfTexture_createFromFile("assets/shiny/gastly_shiny.png", NULL);
+//     textures->shiny_gengar =
+//         sfTexture_createFromFile("assets/shiny/gengar_shiny.png", NULL);
+//     textures->mega_gengar =
+//         sfTexture_createFromFile("assets/mega_gengar.png", NULL);
+//     textures->haunter =
+//         sfTexture_createFromFile("assets/haunter.png", NULL);
+//     textures->mimikyu =
+//         sfTexture_createFromFile("assets/mimikyu.png", NULL);
+//     textures->gastly =
+//         sfTexture_createFromFile("assets/gastly.png", NULL);
+//     textures->gengar =
+//         sfTexture_createFromFile("assets/gengar.png", NULL);
+// }
+
+static void init_cursor(graphics_t *graphics)
+{
+    sfSprite_setTexture(graphics->cursor, graphics->pokeball, sfTrue);
+    sfSprite_setPosition(graphics->cursor, (sfVector2f){100, 100});
+    sfSprite_setTextureRect(graphics->cursor, (sfIntRect){0, 0, 64, 64});
+    sfSprite_setOrigin(graphics->cursor, (sfVector2f){32, 32});
+    sfSprite_rotate(graphics->cursor, 180.0);
+}
+
+static void init_pokeblaster(graphics_t *graphics)
+{
+    sfSprite_setTexture(graphics->hud->poke_blaster,
+        graphics->hud->gun, sfTrue);
+    sfSprite_setPosition(graphics->hud->poke_blaster,
+        (sfVector2f){((WINDOW_WIDTH / 2) - ((185 * 3) / 2)),
+            WINDOW_HEIGHT - (195 * 2)});
+    sfSprite_setTextureRect(graphics->hud->poke_blaster,
+        (sfIntRect){0, 0, 185, 192});
+    sfSprite_setScale(graphics->hud->poke_blaster, (sfVector2f){3, 3});
+}
+
 graphics_t *init_graphics(game_t *game)
 {
     graphics_t *graphics = malloc(sizeof(graphics_t));
@@ -42,5 +87,18 @@ graphics_t *init_graphics(game_t *game)
         return NULL;
     init_floor_and_ceiling(graphics, game);
     init_wall(graphics);
+    if (!graphics->floor || !graphics->ceilling)
+        return NULL;
+    // set_rect_params(graphics, game);
+    // graphics->textures = malloc(sizeof(mobs_t));
+    // init_mob_textures(graphics->textures);
+    graphics->pokeball = sfTexture_createFromFile("assets/pokeball.png", NULL);
+    graphics->cursor = sfSprite_create();
+    init_cursor(graphics);
+    graphics->hud = malloc(sizeof(hud_t));
+    graphics->hud->gun =
+        sfTexture_createFromFile("assets/pokeblasterss.png", NULL);
+    graphics->hud->poke_blaster = sfSprite_create();
+    init_pokeblaster(graphics);
     return graphics;
 }
