@@ -35,11 +35,33 @@ typedef struct menu_s {
     options_t *options_menu;
 } menu_t;
 
+// typedef struct hud_s {
+//     sfSprite *gun_sprite;
+//     sfTexture *gun_texture;
+//     sfIntRect gun_rect;
+// } hud_t;
+
 typedef struct hud_s {
-    sfSprite *gun_sprite;
-    sfTexture *gun_texture;
-    sfIntRect gun_rect;
+    sfTexture *gun;
+    sfSprite *poke_blaster;
+    sfRectangleShape *banner;
+    sfText *life_stat;
+    sfText *points;
 } hud_t;
+
+// typedef struct mobs_s {
+//     sfTexture *mimikyu;
+//     sfTexture *gastly;
+//     sfTexture *haunter;
+//     sfTexture *gengar;
+//     sfTexture *mega_gengar;
+//     sfTexture *shiny_mimikyu;
+//     sfTexture *shiny_gastly;
+//     sfTexture *shiny_haunter;
+//     sfTexture *shiny_gengar;
+//     sfTexture *shiny_mega_gengar;
+// } mobs_t;
+
 typedef struct graphics_s {
     sfRectangleShape *floor;
     sfRectangleShape *ceilling;
@@ -47,7 +69,10 @@ typedef struct graphics_s {
     sfTexture *wall_texture;
     sfIntRect wall_rect;
     menu_t *menu;
+    // mobs_t *textures;
+    sfTexture *pokeball;
+    sfSprite *cursor;
     hud_t *hud;
 } graphics_t;
 
-#endif /* GRAPHICS_H */
+#endif
