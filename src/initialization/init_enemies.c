@@ -5,48 +5,80 @@
 ** init_enemies
 */
 
-#include "enemy.h"
-#include "map.h"
+#include "wolf.h"
 
-// if shiny is catched then life stat++
-
-gastly_t *init_gastly(gastly_t *gastly)
+void set_gastly(gastly_t *gastly, int **map)
 {
+    while (map[(int)(gastly->y / TILE_SIZE)]
+    [(int)(gastly->x / TILE_SIZE)] == 1) {
+        gastly->x = (rand() % MAP_WIDTH) *
+        TILE_SIZE + TILE_SIZE / 2;
+        gastly->y = (rand() % MAP_HEIGHT) *
+        TILE_SIZE + TILE_SIZE / 2;
+    }
+    gastly->sprite = sfSprite_create();
+    if (gastly->shiny == 1)
+        gastly->texture = sfTexture_createFromFile(
+            "assets/spritesheet/gastly_shiny.png", NULL);
+    else
+        gastly->texture = sfTexture_createFromFile(
+            "assets/spritesheet/gastly.png", NULL);
+    gastly->rect = (sfIntRect){0, 0, 67, 76};
+    gastly->frame = 0;
+    gastly->nb_frame = 144;
+    sfSprite_setTextureRect(gastly->sprite, gastly->rect);
+    sfSprite_setTexture(gastly->sprite, gastly->texture, sfTrue);
+}
+
+gastly_t *init_gastly(gastly_t *gastly, int **map)
+{
+    gastly = malloc(sizeof(gastly_t));
+    if (!gastly)
+        return NULL;
     gastly->evolution = GASTLY;
     gastly->attack = 5 + ((rand() / 5) + 1) * gastly->evolution;
     gastly->aim = 250 + (25 * gastly->evolution);
-    gastly->shiny = (rand() / 10);
-    gastly->x = (rand() / MAP_WIDTH);
-    gastly->y = (rand() / MAP_HEIGHT);
+    gastly->shiny = (rand() % 5) == 0;
+    gastly->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
+    gastly->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
+    set_gastly(gastly, map);
     return gastly;
 }
 
-gastly_t **init_gastly_tab(int level)
+void set_mimukyu(mimikyu_t *mimikyu, int **map)
 {
-    gastly_t **gastly_tab = malloc(sizeof(gastly_t) * (6 + (level * 3)));
-
-    for (int i = 0; i < 5; i++)
-        gastly_tab[i] = init_gastly(gastly_tab[i]);
-    gastly_tab[5] = NULL;
-    return gastly_tab;
+    while (map[(int)(mimikyu->y / TILE_SIZE)]
+    [(int)(mimikyu->x / TILE_SIZE)] == 1) {
+        mimikyu->x = (rand() % MAP_WIDTH) *
+        TILE_SIZE + TILE_SIZE / 2;
+        mimikyu->y = (rand() % MAP_HEIGHT) *
+        TILE_SIZE + TILE_SIZE / 2;
+    }
+    mimikyu->sprite = sfSprite_create();
+    if (mimikyu->shiny == 1)
+        mimikyu->texture = sfTexture_createFromFile(
+            "assets/spritesheet/mimikyu_shiny.png", NULL);
+    else
+        mimikyu->texture = sfTexture_createFromFile(
+            "assets/spritesheet/mimikyu.png", NULL);
+    sfSprite_setTexture(mimikyu->sprite, mimikyu->texture, sfTrue);
+    mimikyu->rect = (sfIntRect){0, 0, 57, 67};
+    mimikyu->frame = 0;
+    mimikyu->nb_frame = 39;
+    sfSprite_setTextureRect(mimikyu->sprite, mimikyu->rect);
+    sfSprite_setTexture(mimikyu->sprite, mimikyu->texture, sfTrue);
 }
 
-mimikyu_t *init_mimikyu(mimikyu_t *mimikyu)
+mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map)
 {
+    mimikyu = malloc(sizeof(mimikyu_t));
+    if (!mimikyu)
+        return NULL;
     mimikyu->attack = 10;
     mimikyu->aim = 250;
-    mimikyu->shiny = (rand() / 10);
-    mimikyu->x = (rand() / MAP_WIDTH);
-    mimikyu->y = (rand() / MAP_HEIGHT);
+    mimikyu->shiny = (rand() % 1) == 0;
+    mimikyu->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
+    mimikyu->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
+    set_mimukyu(mimikyu, map);
     return mimikyu;
-}
-
-mimikyu_t **init_mimikyu_tab(int level)
-{
-    mimikyu_t **mimikyu_tab = malloc(sizeof(mimikyu_t) * (2 + level));
-
-    for (int i = 0; i < 5; i++)
-        mimikyu_tab[i] = init_mimikyu(mimikyu_tab[i]);
-    mimikyu_tab[5] = NULL;
-    return mimikyu_tab;
 }
