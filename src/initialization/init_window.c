@@ -7,9 +7,10 @@
 
 #include "wolf.h"
 
-window_t *init_window(void)
+window_t *init_window(sfUint32 style)
 {
     window_t *win = malloc(sizeof(window_t));
+    sfContextSettings settings = {0};
 
     if (!win)
         return NULL;
@@ -19,8 +20,11 @@ window_t *init_window(void)
     win->mode.bitsPerPixel = 32;
     win->mode.width = WINDOW_WIDTH;
     win->mode.height = WINDOW_HEIGHT;
+    win->style = style;
+    settings.antialiasingLevel = 4;
     win->win = sfRenderWindow_create(win->mode, "WOLF",
-        sfResize | sfClose, NULL);
+        style, &settings);
     sfRenderWindow_setFramerateLimit(win->win, 60);
+    win->is_fullscreen = false;
     return win;
 }
