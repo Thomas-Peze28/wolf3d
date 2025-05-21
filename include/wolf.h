@@ -50,7 +50,7 @@ void draw_2d_map(game_t *game);
 int cast_all_rays(game_t *game);
 int calcuate_rays_dist(game_t *game);
 void display_rays_walls(game_t *game);
-int analyze_event(game_t *game);
+int analyze_event(game_t *game, int *shoot);
 void handle_key_pressed(game_t *game);
 
 int is_button_clicked_rect(sfFloatRect rect, sfVector2i mouse);
@@ -58,7 +58,8 @@ bool is_key_pressed(sfEvent event, sfKeyCode key);
 bool is_mouse_clicked(sfEvent event, sfMouseButton button);
 int is_button_clicked(sfSprite *sprite, sfEvent event);
 
-int game_loop(game_t *game);
+int game_loop(game_t *game, int *shoot, int *nb_frame_ball, int *nb_frame_gun,
+    sfIntRect *rect, sfIntRect *hud_rect);
 int manage_rays(game_t *game);
 int draw_minimap(game_t *game);
 int draw_ceilling_floor(game_t *game);
