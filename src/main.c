@@ -77,8 +77,10 @@ int open_window(void)
     return 0;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
+    if (getenv("DISPLAY") == NULL)
+        return 84;
     srand(time(NULL));
     open_window();
     return 0;
