@@ -51,6 +51,7 @@ void display_rays_walls(game_t *game)
         dist = game->player->view_field[i]->distance;
         corrected_dist = dist *
             cosf(game->player->angle - game->player->view_field[i]->angle);
+        game->map->wall_dist[i] = corrected_dist;
         wall_height = (TILE_SIZE / corrected_dist) * (WINDOW_WIDTH / 2);
         create_wall(game, i, corrected_dist, wall_height);
     }

@@ -12,7 +12,6 @@ static int fill_map_line(char *buffer, int **map, int line)
     int j = 0;
 
     while (j < MAP_WIDTH) {
-        printf("%d\n", buffer[j]);
         map[line][j] = buffer[j] - '0';
         j++;
     }
@@ -29,7 +28,6 @@ static int file_to_map(char *filepath, int **map)
     if (!file)
         return -1;
     while (getline(&buffer, &len, file) != -1) {
-        printf("%s", buffer);
         fill_map_line(buffer, map, line);
         line++;
     }

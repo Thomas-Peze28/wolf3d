@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** day_13
+** wolf3D
 ** File description:
 ** main
 */
@@ -18,8 +18,24 @@ void handle_key_pressed(game_t *game)
 
 int analyze_event(game_t *game)
 {
+    sfContextSettings settings = {0};
+
     if (game->window->event.type == sfEvtClosed)
         sfRenderWindow_close(game->window->win);
+    if (game->window->event.type == sfEvtKeyPressed
+        && game->window->event.key.code == sfKeyF11) {
+        sfRenderWindow_destroy(game->window->win);
+        if (game->window->style == sfFullscreen)
+            game->window->style = sfResize | sfClose;
+        else
+            game->window->style = sfFullscreen;
+        settings.antialiasingLevel = 4;
+        game->window->win = sfRenderWindow_create(
+            game->window->mode, "WOLF", game->window->style, &settings);
+        sfRenderWindow_setFramerateLimit(game->window->win, 60);
+    }
+    if (is_key_pressed(game->window->event, sfKeyEscape))
+        display_menu(game);
     return 0;
 }
 
@@ -36,20 +52,24 @@ int generate_test(game_t *game)
 int open_window(void)
 {
     sfClock *clock = sfClock_create();
-    sfTime time = {0};
+    sfTime time_clock = {0};
     float seconds = 0.0;
     game_t *game = init_game();
+    gastly_t **gastly_tab = init_gastly_tab(3, game->map->map);
+    mimikyu_t **mimikyu_tab = init_mimikyu_tab(3, game->map->map);
 
+    display_menu(game);
     generate_test(game);
-    draw_2d_map(game);
     while (sfRenderWindow_isOpen(game->window->win)) {
-        time = sfClock_getElapsedTime(clock);
-        seconds = sfTime_asSeconds(time);
+        time_clock = sfClock_getElapsedTime(clock);
+        seconds = sfTime_asSeconds(time_clock);
         while (sfRenderWindow_pollEvent(game->window->win,
             &game->window->event))
             analyze_event(game);
         if (seconds > 0.01) {
             game_loop(game);
+            display_ennemies(gastly_tab, mimikyu_tab, game);
+            sfRenderWindow_display(game->window->win);
             sfClock_restart(clock);
         }
     }
@@ -59,6 +79,7 @@ int open_window(void)
 
 int main(void)
 {
+    srand(time(NULL));
     open_window();
     return 0;
 }
