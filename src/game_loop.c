@@ -32,13 +32,13 @@ int draw_ceilling_floor(game_t *game)
     return 0;
 }
 
-static void move_rect(sfIntRect *rect, int offset, int max_value)
-{
-    if (rect->left < max_value)
-        rect->left += offset;
-    if (rect->left >= max_value)
-        rect->left = 0;
-}
+// static void move_rect(sfIntRect *rect, int offset, int max_value)
+// {
+//     if (rect->left < max_value)
+//         rect->left += offset;
+//     if (rect->left >= max_value)
+//         rect->left = 0;
+// }
 
 int game_loop(game_t *game, int *shoot, int *nb_frame_ball, int *nb_frame_gun,
     sfIntRect *rect, sfIntRect *hud_rect)

@@ -70,8 +70,8 @@ int launch_game(void)
     gastly_t **gastly_tab = init_gastly_tab(3, game->map->map);
     mimikyu_t **mimikyu_tab = init_mimikyu_tab(3, game->map->map);
 
-    sfRenderWindow_setMouseCursorVisible(game->window->win, sfFalse);
     display_menu(game);
+    sfRenderWindow_setMouseCursorVisible(game->window->win, sfFalse);
     generate_test(game);
     while (sfRenderWindow_isOpen(game->window->win)) {
         time_clock = sfClock_getElapsedTime(clock);
