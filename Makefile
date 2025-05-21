@@ -6,11 +6,13 @@
 ##
 
 SRC	=	src/main.c	\
-		src/display.c	\
+		src/minimap.c	\
+		src/tools/is_pressed.c	\
 		src/handle_collision.c	\
 		src/map/init_map.c	\
 		src/map/create_tiles.c	\
 		src/initialization/init_enemies.c	\
+		src/initialization/init_enemies_tab.c	\
 		src/initialization/init_structs.c	\
 		src/initialization/init_window.c	\
 		src/initialization/init_player.c	\
@@ -19,7 +21,15 @@ SRC	=	src/main.c	\
 		src/rays/cast_rays.c \
 		src/game_loop.c	\
 		src/print_fps.c	\
-		src/move_player.c
+		src/move_player.c \
+		src/menu/display_menu.c \
+		src/menu/options_menu.c \
+		src/menu/init_menu.c \
+		src/hud/display_fps.c \
+		src/ennemies/display_ennemies.c \
+		src/tools/move_rect.c \
+		src/tools/normalize_angle.c \
+		src/ennemies/update_animation.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -35,8 +45,8 @@ $(NAME):	$(OBJ)
 
 opti:	$(OBJ)
 	gcc -o $(NAME) $(OBJ) $(CFLAGS) -pg
-	timeout 5 ./$(NAME)
-	gprof ./$(NAME) gmon.out > profile.txt
+	timeout 10s ./wolf3d || true
+	gprof ./wolf3d gmon.out > result.txt
 
 clean:
 	rm -f $(OBJ)
