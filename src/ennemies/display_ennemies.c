@@ -62,16 +62,17 @@ void display_mimikyu(game_t *game, mimikyu_t *mimikyu)
     }
 }
 
-int display_ennemies(gastly_t **gastly_tab, mimikyu_t **mimikyu_tab,
-    game_t *game)
+int display_ennemies(game_t *game)
 {
-    for (int i = 0; gastly_tab[i] != NULL; i++) {
-        update_gastly_anim(gastly_tab[i]);
-        display_gastly(game, gastly_tab[i]);
+    for (int i = 0; game->gastly_tab[i] != NULL; i++) {
+        update_gastly_anim(game->gastly_tab[i]);
+        if (game->gastly_tab[i]->is_alive == true)
+            display_gastly(game, game->gastly_tab[i]);
     }
-    for (int i = 0; mimikyu_tab[i] != NULL; i++) {
-        update_mimikyu_anim(mimikyu_tab[i]);
-        display_mimikyu(game, mimikyu_tab[i]);
+    for (int i = 0; game->mimikyu_tab[i] != NULL; i++) {
+        update_mimikyu_anim(game->mimikyu_tab[i]);
+        if (game->mimikyu_tab[i]->is_alive == true)
+            display_mimikyu(game, game->mimikyu_tab[i]);
     }
     return 0;
 }
