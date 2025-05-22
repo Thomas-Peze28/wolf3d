@@ -7,20 +7,6 @@
 
 #include "wolf.h"
 
-void save_map_to_file(int map[MAP_HEIGHT][MAP_WIDTH], const char *filename)
-{
-    FILE *file = fopen(filename, "w");
-
-    if (!file)
-        return;
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-        for (int x = 0; x < MAP_WIDTH; x++)
-            fprintf(file, "%d", map[y][x]);
-        fprintf(file, "\n");
-    }
-    fclose(file);
-}
-
 void shuffle_dirs(int directions[4][2])
 {
     int random = 0;
@@ -58,17 +44,26 @@ void generate_maze(int map[MAP_HEIGHT][MAP_WIDTH], int x, int y)
     }
 }
 
+void set_room(int map[MAP_HEIGHT][MAP_WIDTH],
+    sfVector2i tupple, int w, int h)
+{
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < w; j++)
+            map[tupple.y + i][tupple.x + j] = 0;
+}
+
 void add_rooms(int map[MAP_HEIGHT][MAP_WIDTH], int nb_rooms)
 {
-    for (int r = 0; r < nb_rooms; r++) {
-        int room_w = 2 + rand() % 8;
-        int room_h = 2 + rand() % 8;
-        int x = 1 + rand() % (MAP_WIDTH - room_w - 2);
-        int y = 1 + rand() % (MAP_HEIGHT - room_h - 2);
+    int room_w = 0;
+    int room_h = 0;
+    sfVector2i tupple = {0, 0};
 
-        for (int i = 0; i < room_h; i++)
-            for (int j = 0; j < room_w; j++)
-                map[y + i][x + j] = 0;
+    for (int r = 0; r < nb_rooms; r++) {
+        room_w = 2 + rand() % 8;
+        room_h = 2 + rand() % 8;
+        tupple.x = 1 + rand() % (MAP_WIDTH - room_w - 2);
+        tupple.y = 1 + rand() % (MAP_HEIGHT - room_h - 2);
+        set_room(map, tupple, room_w, room_h);
     }
 }
 

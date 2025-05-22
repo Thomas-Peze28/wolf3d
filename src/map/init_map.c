@@ -53,7 +53,7 @@ map_t *init_map(void)
     for (int i = 0; i < map->height; i++)
         for (int j = 0; j < map->width; j++)
             map->map[i][j] = 0;
-    file_to_map("map_gen.txt", map->map);
+    file_to_map("map.txt", map->map);
     map->tiles = create_tiles(map->width, map->height,
         map->tile_size, map->map);
     return map;
