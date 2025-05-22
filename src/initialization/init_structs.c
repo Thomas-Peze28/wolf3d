@@ -19,6 +19,7 @@ game_t *init_game(void)
     game->player = init_player(game->map->tile_size);
     game->graphics = init_graphics(game);
     game->graphics->menu = init_menu();
+    game->sounds = init_sounds();
     game->map->tiles = create_tiles(game->map->width, game->map->height,
         game->map->tile_size, game->map->map);
     return game;
