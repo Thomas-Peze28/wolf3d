@@ -32,9 +32,10 @@
     #define OPTION_MENU game->graphics->menu->options_menu
     #define MAIN_MENU game->graphics->menu->main_menu
 
-
 typedef struct sounds_s {
     sfMusic *background_music;
+    sfSoundBuffer *footstep_buffer;
+    sfSound *footstep;
 } sounds_t;
 
 typedef struct shoot_s {
@@ -98,6 +99,7 @@ void display_fps(game_t *game);
 menu_t *init_menu(void);
 int display_options_menu(game_t *game);
 menu_t *init_menu(void);
+options_t *init_options_menu(void);
 sounds_t *init_sounds(void);
 void handle_shoot(game_t *game, shoot_t *shoot);
 

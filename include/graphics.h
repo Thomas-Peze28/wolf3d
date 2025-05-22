@@ -28,18 +28,16 @@ typedef struct main_s {
 typedef struct options_s {
     sfFont *font;
     sfText *fullscreen_btn;
+    sfText *sound_text;
+    sfRectangleShape *sound_slider_bar;
+    sfRectangleShape *sound_slider_cursor;
+    float sound_volume;
 } options_t;
 
 typedef struct menu_s {
     main_t *main_menu;
     options_t *options_menu;
 } menu_t;
-
-// typedef struct hud_s {
-//     sfSprite *gun_sprite;
-//     sfTexture *gun_texture;
-//     sfIntRect gun_rect;
-// } hud_t;
 
 typedef struct hud_s {
     sfTexture *gun;
@@ -48,19 +46,6 @@ typedef struct hud_s {
     sfText *life_stat;
     sfText *points;
 } hud_t;
-
-// typedef struct mobs_s {
-//     sfTexture *mimikyu;
-//     sfTexture *gastly;
-//     sfTexture *haunter;
-//     sfTexture *gengar;
-//     sfTexture *mega_gengar;
-//     sfTexture *shiny_mimikyu;
-//     sfTexture *shiny_gastly;
-//     sfTexture *shiny_haunter;
-//     sfTexture *shiny_gengar;
-//     sfTexture *shiny_mega_gengar;
-// } mobs_t;
 
 typedef struct graphics_s {
     sfRectangleShape *floor;

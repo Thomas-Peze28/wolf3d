@@ -26,6 +26,7 @@ SRC	=	src/main.c	\
 		src/menu/display_menu.c \
 		src/menu/options_menu.c \
 		src/menu/init_menu.c \
+		src/menu/init_option_menu.c \
 		src/hud/display_fps.c \
 		src/ennemies/display_ennemies.c \
 		src/tools/move_rect.c \

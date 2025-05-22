@@ -22,8 +22,33 @@ int toggle_fullscreen(game_t *game)
     return 0;
 }
 
+int change_volume(game_t *game, sfVector2i mouse)
+{
+    sfFloatRect slider_bounds = sfRectangleShape_getGlobalBounds(
+        OPTION_MENU->sound_slider_bar);
+    float rel_x = mouse.x - slider_bounds.left;
+    float volume = (rel_x / slider_bounds.width) * 100.0f;
+    float cursor_x = (WINDOW_WIDTH / 2 - 150) + (volume / 100.0f) * 300;
+
+    if (!sfFloatRect_contains(&slider_bounds, mouse.x, mouse.y))
+        return 0;
+    if (volume < 0)
+        volume = 0;
+    if (volume > 100)
+        volume = 100;
+    OPTION_MENU->sound_volume = volume;
+    sfMusic_setVolume(game->sounds->background_music, volume);
+    sfRectangleShape_setPosition(OPTION_MENU->sound_slider_cursor,
+        (sfVector2f){cursor_x, 590});
+    return 0;
+}
+
 int analyze_option_event(game_t *game)
 {
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(game->window->win);
+    sfFloatRect slider_bounds = sfRectangleShape_getGlobalBounds(
+        OPTION_MENU->sound_slider_bar);
+
     if (game->window->event.type == sfEvtClosed)
         sfRenderWindow_close(game->window->win);
     if (is_key_pressed(game->window->event, sfKeyEscape))
@@ -34,7 +59,25 @@ int analyze_option_event(game_t *game)
             sfMouse_getPositionRenderWindow(game->window->win))) {
         toggle_fullscreen(game);
     }
+    if (is_mouse_clicked(game->window->event, sfMouseLeft)
+        && sfFloatRect_contains(&slider_bounds, mouse.x, mouse.y)) {
+        change_volume(game, mouse);
+    }
     return 1;
+}
+
+void draw_options_menu(game_t *game)
+{
+    sfRenderWindow_clear(game->window->win, sfBlack);
+    sfRenderWindow_drawText(game->window->win,
+        OPTION_MENU->fullscreen_btn, NULL);
+    sfRenderWindow_drawRectangleShape(game->window->win,
+        OPTION_MENU->sound_slider_bar, NULL);
+    sfRenderWindow_drawRectangleShape(game->window->win,
+        OPTION_MENU->sound_slider_cursor, NULL);
+    sfRenderWindow_drawText(game->window->win,
+        OPTION_MENU->sound_text, NULL);
+    sfRenderWindow_display(game->window->win);
 }
 
 int display_options_menu(game_t *game)
@@ -52,10 +95,7 @@ int display_options_menu(game_t *game)
         }
         if (status == 0)
             return 0;
-        sfRenderWindow_clear(game->window->win, sfBlack);
-        sfRenderWindow_drawText(game->window->win,
-            OPTION_MENU->fullscreen_btn, NULL);
-        sfRenderWindow_display(game->window->win);
+        draw_options_menu(game);
     }
     return 0;
 }

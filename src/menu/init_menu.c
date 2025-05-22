@@ -63,23 +63,6 @@ main_t *init_main_menu(void)
     return main_menu;
 }
 
-options_t *init_options_menu(void)
-{
-    options_t *options_menu = malloc(sizeof(options_t));
-
-    if (!options_menu)
-        return NULL;
-    options_menu->font = sfFont_createFromFile("assets/Roboto-Black.ttf");
-    options_menu->fullscreen_btn = sfText_create();
-    sfText_setFont(options_menu->fullscreen_btn, options_menu->font);
-    sfText_setString(options_menu->fullscreen_btn, "Fullscreen");
-    sfText_setCharacterSize(options_menu->fullscreen_btn, 60);
-    sfText_setPosition(options_menu->fullscreen_btn,
-        (sfVector2f){WINDOW_WIDTH / 2 - 200, 400});
-    sfText_setFillColor(options_menu->fullscreen_btn, sfYellow);
-    return options_menu;
-}
-
 menu_t *init_menu(void)
 {
     menu_t *menu = malloc(sizeof(menu_t));

@@ -15,10 +15,8 @@ sounds_t *init_sounds(void)
         return NULL;
     sounds->background_music = sfMusic_createFromFile(
         "assets/sound/lavender_town_theme.mp3");
-    if (!sounds->background_music)
-        return NULL;
     sfMusic_setLoop(sounds->background_music, sfTrue);
-    sfMusic_setVolume(sounds->background_music, 50);
+    sfMusic_setVolume(sounds->background_music, 1);
     sfMusic_play(sounds->background_music);
     return sounds;
 }
