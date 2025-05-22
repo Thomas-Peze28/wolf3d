@@ -14,6 +14,7 @@
     #include <SFML/Graphics.h>
     #include <SFML/System.h>
     #include <SFML/Window.h>
+    #include <SFML/Audio.h>
     #include <unistd.h>
     #include <stdlib.h>
     #include <stdio.h>
@@ -30,12 +31,17 @@
     #define OPTION_MENU game->graphics->menu->options_menu
     #define MAIN_MENU game->graphics->menu->main_menu
 
+
+typedef struct sounds_s {
+    sfMusic *background_music;
+} sounds_t;
 typedef struct game_s {
     int level;
     window_t *window;
     map_t *map;
     player_t *player;
     graphics_t *graphics;
+    sounds_t *sounds;
 } game_t;
 
 int my_strcmp(char const *s1, char const *s2);
@@ -68,6 +74,7 @@ void print_framerate(void);
 void handle_player_movement(game_t *game, player_t *player, map_t *map);
 void move_rect(sfIntRect *rect, int offset, int max_value);
 float normalize_angle(float angle);
+void set_cursor_position(game_t *game);
 
 void display_gastly(game_t *game, gastly_t *gastly);
 void display_mimikyu(game_t *game, mimikyu_t *mimikyu);
@@ -81,5 +88,6 @@ void display_fps(game_t *game);
 menu_t *init_menu(void);
 int display_options_menu(game_t *game);
 menu_t *init_menu(void);
+sounds_t *init_sounds(void);
 
 #endif /* WOLF_H */
