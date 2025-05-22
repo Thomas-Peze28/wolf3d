@@ -33,6 +33,9 @@ SRC	=	src/main.c	\
 		src/tools/set_cursor_pos.c \
 		src/ennemies/update_animation.c \
 		src/map/generate_map.c \
+		src/map/save_map.c \
+		src/handle_shoot.c \
+		src/handle_game_event.c \
 
 OBJ	=	$(SRC:.c=.o)
 
