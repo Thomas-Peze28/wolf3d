@@ -38,12 +38,14 @@ int display_menu(game_t *game)
 {
     int status = 1;
 
+    sfRenderWindow_setMouseCursorVisible(game->window->win, sfTrue);
     while (sfRenderWindow_isOpen(game->window->win)) {
         while (sfRenderWindow_pollEvent(game->window->win,
             &game->window->event)) {
             status = analyze_menu_event(game);
         }
         if (status == 0) {
+            sfRenderWindow_setMouseCursorVisible(game->window->win, sfFalse);
             sfRenderWindow_clear(game->window->win, sfBlack);
             return 0;
         }
