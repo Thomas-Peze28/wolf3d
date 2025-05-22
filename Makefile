@@ -17,6 +17,7 @@ SRC	=	src/main.c	\
 		src/initialization/init_window.c	\
 		src/initialization/init_player.c	\
 		src/initialization/init_graphics.c	\
+		src/initialization/init_sounds.c	\
 		src/display_walls.c \
 		src/rays/cast_rays.c \
 		src/game_loop.c	\
@@ -29,7 +30,9 @@ SRC	=	src/main.c	\
 		src/ennemies/display_ennemies.c \
 		src/tools/move_rect.c \
 		src/tools/normalize_angle.c \
+		src/tools/set_cursor_pos.c \
 		src/ennemies/update_animation.c \
+		src/map/generate_map.c \
 
 OBJ	=	$(SRC:.c=.o)
 
