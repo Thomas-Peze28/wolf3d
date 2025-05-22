@@ -22,6 +22,7 @@ typedef struct gastly_s {
     float y;
     int aim;
     int attack;
+    bool is_alive;
     evolution_t evolution;
     int shiny;
     sfTexture *texture;
@@ -37,6 +38,7 @@ typedef struct mimikyu_s {
     int aim;
     int attack;
     int shiny;
+    bool is_alive;
     sfTexture *texture;
     sfSprite *sprite;
     sfIntRect rect;

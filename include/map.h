@@ -40,6 +40,7 @@ bool is_wall(map_t *map, int x, int y);
 tile_t ***create_tiles(int width, int height, int tile_size, int **map);
 
 void generate_maze(int map[MAP_HEIGHT][MAP_WIDTH], int x, int y);
+void save_map_to_file(int map[MAP_HEIGHT][MAP_WIDTH], const char *filename);
 void generate_and_save_map(void);
 
 #endif
