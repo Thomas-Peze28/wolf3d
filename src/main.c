@@ -48,8 +48,8 @@ int analyze_event(game_t *game, int *shoot)
 
 int generate_test(game_t *game)
 {
-    game->player->x = 2 * TILE_SIZE;
-    game->player->y = 3 * TILE_SIZE;
+    game->player->x = 1 * TILE_SIZE;
+    game->player->y = 1 * TILE_SIZE;
     game->player->angle = 0;
     if (!game || !game->window->win)
         return 84;
@@ -71,6 +71,7 @@ int launch_game(void)
     mimikyu_t **mimikyu_tab = init_mimikyu_tab(3, game->map->map);
 
     display_menu(game);
+    set_cursor_position(game);
     sfRenderWindow_setMouseCursorVisible(game->window->win, sfFalse);
     generate_test(game);
     while (sfRenderWindow_isOpen(game->window->win)) {
@@ -93,7 +94,6 @@ int launch_game(void)
 
 int main(int argc, char **argv, char **env)
 {
-    // -h
     (void)argc;
     if (!env || !env[0] || !getenv("DISPLAY"))
         return 84;
@@ -102,6 +102,7 @@ int main(int argc, char **argv, char **env)
         return 0;
     }
     srand(time(NULL));
+    generate_and_save_map();
     launch_game();
     return 0;
 }
