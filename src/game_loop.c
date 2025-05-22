@@ -34,6 +34,12 @@ int draw_ceilling_floor(game_t *game)
 
 void render_game(game_t *game)
 {
+    float life_ratio = (float)game->player->health / 100.0f;
+
+    if (life_ratio < 0)
+        life_ratio = 0;
+    sfRectangleShape_setSize(game->graphics->hud->life_bar,
+        (sfVector2f){300 * life_ratio, 30});
     sfRenderWindow_clear(game->window->win, sfBlack);
     draw_ceilling_floor(game);
     manage_rays(game);
@@ -42,12 +48,17 @@ void render_game(game_t *game)
     sfRenderWindow_drawSprite(game->window->win, game->graphics->cursor, NULL);
     sfRenderWindow_drawSprite(game->window->win,
         game->graphics->hud->poke_blaster, NULL);
+    sfRenderWindow_drawRectangleShape(game->window->win,
+        game->graphics->hud->life_bar_bg, NULL);
+    sfRenderWindow_drawRectangleShape(game->window->win,
+        game->graphics->hud->life_bar, NULL);
 }
 
 int game_loop(game_t *game, shoot_t *shoot)
 {
     handle_shoot(game, shoot);
     handle_key_pressed(game);
+    enemies_attack_player(game);
     render_game(game);
     return 0;
 }

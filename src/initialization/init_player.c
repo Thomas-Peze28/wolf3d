@@ -37,23 +37,34 @@ player_t *init_view_player(player_t *player)
     return player;
 }
 
-player_t *init_player(int tile_size)
+void init_player_avatar(player_t *player, int tile_size)
 {
-    player_t *player = malloc(sizeof(player_t));
-
-    if (!player)
-        return NULL;
-    player->x = 1 * TILE_SIZE;
-    player->y = 1 * TILE_SIZE;
-    player->angle = 0;
-    player->view_angle = 0;
-    player->speed = 0.2;
     player->avatar = sfCircleShape_create();
     sfCircleShape_setRadius(player->avatar, tile_size / 2);
     sfCircleShape_setOrigin(player->avatar, (sfVector2f){0, 0});
     sfCircleShape_setFillColor(player->avatar, sfRed);
     sfCircleShape_setPosition(player->avatar,
         (sfVector2f){player->x * tile_size, player->y * tile_size});
+}
+
+void init_player_stats(player_t *player)
+{
+    player->x = 1 * TILE_SIZE;
+    player->y = 1 * TILE_SIZE;
+    player->angle = 0;
+    player->view_angle = 0;
+    player->speed = 0.2;
+    player->health = 100;
+}
+
+player_t *init_player(int tile_size)
+{
+    player_t *player = malloc(sizeof(player_t));
+
+    if (!player)
+        return NULL;
+    init_player_stats(player);
+    init_player_avatar(player, tile_size);
     player->view_field = malloc(sizeof(view_field_t *) * NUM_RAYS);
     if (!player->view_field)
         return NULL;

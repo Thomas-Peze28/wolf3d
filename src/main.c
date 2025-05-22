@@ -39,8 +39,13 @@ int launch_game(void)
     shoot.rect = (sfIntRect){0, 0, 64, 64};
     shoot.hud_rect = (sfIntRect){0, 0, 185, 192};
     display_menu(game);
-    while (sfRenderWindow_isOpen(game->window->win))
+    while (sfRenderWindow_isOpen(game->window->win)) {
         game_clock(game, &shoot, clock);
+        if (game->player->health <= 0) {
+            display_game_over(game);
+            return 0;
+        }
+    }
     sfRenderWindow_destroy(game->window->win);
     return 0;
 }

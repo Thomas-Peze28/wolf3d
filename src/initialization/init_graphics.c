@@ -55,6 +55,19 @@ static void init_pokeblaster(graphics_t *graphics)
     sfSprite_setScale(graphics->hud->poke_blaster, (sfVector2f){3, 3});
 }
 
+void init_life_bar(hud_t *hud)
+{
+    hud->life_bar_bg = sfRectangleShape_create();
+    sfRectangleShape_setSize(hud->life_bar_bg, (sfVector2f){300, 35});
+    sfRectangleShape_setFillColor(hud->life_bar_bg,
+        sfColor_fromRGB(50, 50, 50));
+    sfRectangleShape_setPosition(hud->life_bar_bg, (sfVector2f){30, 900});
+    hud->life_bar = sfRectangleShape_create();
+    sfRectangleShape_setSize(hud->life_bar, (sfVector2f){300, 30});
+    sfRectangleShape_setFillColor(hud->life_bar, sfGreen);
+    sfRectangleShape_setPosition(hud->life_bar, (sfVector2f){30, 900});
+}
+
 graphics_t *init_graphics(game_t *game)
 {
     graphics_t *graphics = malloc(sizeof(graphics_t));
@@ -73,5 +86,6 @@ graphics_t *init_graphics(game_t *game)
         sfTexture_createFromFile("assets/pokeblasterss.png", NULL);
     graphics->hud->poke_blaster = sfSprite_create();
     init_pokeblaster(graphics);
+    init_life_bar(graphics->hud);
     return graphics;
 }
