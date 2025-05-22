@@ -77,7 +77,7 @@ mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map)
         return NULL;
     mimikyu->attack = 10;
     mimikyu->aim = 250;
-    mimikyu->shiny = (rand() % 1) == 0;
+    mimikyu->shiny = (rand() % 5) == 0;
     mimikyu->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
     mimikyu->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
     mimikyu->is_alive = true;
