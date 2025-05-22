@@ -102,5 +102,7 @@ menu_t *init_menu(void);
 options_t *init_options_menu(void);
 sounds_t *init_sounds(void);
 void handle_shoot(game_t *game, shoot_t *shoot);
+void enemies_attack_player(game_t *game);
+void display_game_over(game_t *game);
 
 #endif /* WOLF_H */

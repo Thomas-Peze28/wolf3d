@@ -45,6 +45,8 @@ typedef struct hud_s {
     sfRectangleShape *banner;
     sfText *life_stat;
     sfText *points;
+    sfRectangleShape *life_bar_bg;
+    sfRectangleShape *life_bar;
 } hud_t;
 
 typedef struct graphics_s {
