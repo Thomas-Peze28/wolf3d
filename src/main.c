@@ -25,7 +25,6 @@ void game_clock(game_t *game, shoot_t *shoot, sfClock *clock)
     handle_events(game, shoot);
     if (seconds > 0.01) {
         game_loop(game, shoot);
-        display_ennemies(game);
         sfRenderWindow_display(game->window->win);
         sfClock_restart(clock);
     }
@@ -51,7 +50,7 @@ int main(int argc, char **argv, char **env)
     (void)argc;
     if (!env || !env[0] || !getenv("DISPLAY"))
         return 84;
-    if (argv[1] && argv[1][0] == '-' && argv[1][1] == 'h') {
+    if (argv[1] && strcmp(argv[1], "-h") == 0) {
         printf("USAGE :\n\t./wolf3d (-h)\n\nDESCRIPTION :\n");
         return 0;
     }
