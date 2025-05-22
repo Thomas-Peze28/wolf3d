@@ -22,5 +22,7 @@ game_t *init_game(void)
     game->sounds = init_sounds();
     game->map->tiles = create_tiles(game->map->width, game->map->height,
         game->map->tile_size, game->map->map);
+    game->gastly_tab = init_gastly_tab(3, game->map->map);
+    game->mimikyu_tab = init_mimikyu_tab(3, game->map->map);
     return game;
 }

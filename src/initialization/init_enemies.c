@@ -41,6 +41,7 @@ gastly_t *init_gastly(gastly_t *gastly, int **map)
     gastly->shiny = (rand() % 5) == 0;
     gastly->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
     gastly->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
+    gastly->is_alive = true;
     set_gastly(gastly, map);
     return gastly;
 }
@@ -79,6 +80,7 @@ mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map)
     mimikyu->shiny = (rand() % 1) == 0;
     mimikyu->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
     mimikyu->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
+    mimikyu->is_alive = true;
     set_mimukyu(mimikyu, map);
     return mimikyu;
 }

@@ -43,8 +43,8 @@ player_t *init_player(int tile_size)
 
     if (!player)
         return NULL;
-    player->x = 0;
-    player->y = 0;
+    player->x = 1 * TILE_SIZE;
+    player->y = 1 * TILE_SIZE;
     player->angle = 0;
     player->view_angle = 0;
     player->speed = 0.2;
