@@ -38,6 +38,7 @@ void render_game(game_t *game)
     draw_ceilling_floor(game);
     manage_rays(game);
     draw_minimap(game);
+    display_ennemies(game);
     sfRenderWindow_drawSprite(game->window->win, game->graphics->cursor, NULL);
     sfRenderWindow_drawSprite(game->window->win,
         game->graphics->hud->poke_blaster, NULL);
