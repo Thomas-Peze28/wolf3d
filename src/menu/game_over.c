@@ -22,17 +22,28 @@ void draw_game_over_screen(game_t *game, sfSprite *sprite)
     sfRenderWindow_display(game->window->win);
 }
 
+void play_game_over_sound(void)
+{
+    sfSound *mimikyu = init_sound("assets/sound/mimikyu.ogg", 100);
+
+    if (mimikyu) {
+        sfSound_play(mimikyu);
+        sfSound_destroy(mimikyu);
+    }
+}
+
 void display_game_over(game_t *game)
 {
     sfTexture *texture = sfTexture_createFromFile(
-        "assets/game_over2.png", NULL);
+        "assets/game_over1.png", NULL);
     sfSprite *sprite = sfSprite_create();
     sfClock *clock = sfClock_create();
 
     if (!texture || !sprite)
         return;
+    play_game_over_sound();
     sfSprite_setTexture(sprite, texture, sfTrue);
-    sfSprite_setScale(sprite, (sfVector2f){1.2f, 1.2f});
+    sfSprite_setScale(sprite, (sfVector2f){1.25f, 1.08f});
     draw_game_over_screen(game, sprite);
     while (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 5.0f) {
         while (sfRenderWindow_pollEvent(game->window->win,
