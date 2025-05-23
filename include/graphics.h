@@ -52,11 +52,8 @@ typedef struct hud_s {
 typedef struct graphics_s {
     sfRectangleShape *floor;
     sfRectangleShape *ceilling;
-    sfSprite *wall_sprite;
-    sfTexture *wall_texture;
     sfIntRect wall_rect;
     menu_t *menu;
-    // mobs_t *textures;
     sfTexture *pokeball;
     sfSprite *cursor;
     hud_t *hud;

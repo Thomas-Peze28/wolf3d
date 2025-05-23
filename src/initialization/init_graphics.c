@@ -24,16 +24,6 @@ void init_floor_and_ceiling(graphics_t *graphics, game_t *game)
     sfRectangleShape_setPosition(graphics->ceilling, (sfVector2f){0, 0});
 }
 
-void init_wall(graphics_t *graphics)
-{
-    graphics->wall_rect = (sfIntRect){0, 0, 64, 64};
-    graphics->wall_texture = sfTexture_createFromFile(
-        "assets/stone_wall.jpg", NULL);
-    graphics->wall_sprite = sfSprite_create();
-    sfSprite_setTexture(graphics->wall_sprite, graphics->wall_texture, sfTrue);
-    sfSprite_setTextureRect(graphics->wall_sprite, graphics->wall_rect);
-}
-
 static void init_cursor(graphics_t *graphics)
 {
     sfSprite_setTexture(graphics->cursor, graphics->pokeball, sfTrue);
@@ -75,15 +65,15 @@ graphics_t *init_graphics(game_t *game)
     if (!graphics)
         return NULL;
     init_floor_and_ceiling(graphics, game);
-    init_wall(graphics);
+    graphics->wall_rect = (sfIntRect){0, 0, 64, 64};
     if (!graphics->floor || !graphics->ceilling)
         return NULL;
-    graphics->pokeball = sfTexture_createFromFile("assets/pokeball.png", NULL);
+    graphics->pokeball = sfTexture_createFromFile("assets/spritesheet/pokeball.png", NULL);
     graphics->cursor = sfSprite_create();
     init_cursor(graphics);
     graphics->hud = malloc(sizeof(hud_t));
     graphics->hud->gun =
-        sfTexture_createFromFile("assets/pokeblasterss.png", NULL);
+        sfTexture_createFromFile("assets/spritesheet/pokeblasterss.png", NULL);
     graphics->hud->poke_blaster = sfSprite_create();
     init_pokeblaster(graphics);
     init_life_bar(graphics->hud);
