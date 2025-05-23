@@ -82,7 +82,7 @@ The color of the walls should vary depending on their orientation or have a text
 - You can choose how to shoot (centered or with a visor following your mouse).
 
 ### PREVIEW
-![Our_process](readme_assets/wolf3d.gif)
+![Our_process](readme_assets/doc.png)
 
 ## MAP
 The map file contains all the information about the map simulation.
