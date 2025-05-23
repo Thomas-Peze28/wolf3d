@@ -10,7 +10,7 @@
 int verif_line_content(char *line)
 {
     for (int i = 0; line[i]; i++) {
-        if (line[i] != '0'&& line[i] != '1' && line[i] != '\n')
+        if (line[i] != '0' && line[i] != '1' && line[i] != '\n')
             return 84;
     }
     return 0;
@@ -22,7 +22,7 @@ int handle_error(char *file_name)
     char *buffer = NULL;
     size_t len = 0;
     int line = 0;
- 
+
     if (!file)
         return -1;
     getline(&buffer, &len, file);

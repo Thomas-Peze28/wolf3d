@@ -57,5 +57,6 @@ mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map);
 gastly_t *init_gastly(gastly_t *gastly, int **map);
 mimikyu_t **init_mimikyu_tab(int level, int **map);
 gastly_t **init_gastly_tab(int level, int **map);
+int count_ennemies(gastly_t **gastly_tab, mimikyu_t **mimikyu_tab);
 
 #endif

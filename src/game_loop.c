@@ -56,6 +56,8 @@ void render_game(game_t *game)
 
 int game_loop(game_t *game, shoot_t *shoot)
 {
+    game->ennmies_alive = count_ennemies(game->gastly_tab,
+        game->mimikyu_tab);
     handle_shoot(game, shoot);
     handle_key_pressed(game);
     enemies_attack_player(game);

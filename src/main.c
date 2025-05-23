@@ -46,6 +46,10 @@ int launch_game(char *filepath)
             display_game_over(game);
             return 0;
         }
+        if (game->ennmies_alive == 0) {
+            display_win(game);
+            return 0;
+        }
     }
     sfRenderWindow_destroy(game->window->win);
     return 0;

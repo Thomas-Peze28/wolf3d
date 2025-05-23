@@ -28,6 +28,7 @@ SRC	=	src/main.c	\
 		src/menu/options_menu.c \
 		src/menu/init_menu.c \
 		src/menu/game_over.c \
+		src/menu/win.c \
 		src/menu/init_option_menu.c \
 		src/hud/display_fps.c \
 		src/ennemies/display_ennemies.c \
@@ -36,6 +37,7 @@ SRC	=	src/main.c	\
 		src/tools/normalize_angle.c \
 		src/tools/set_cursor_pos.c \
 		src/ennemies/update_animation.c \
+		src/ennemies/count_ennemies.c \
 		src/map/generate_map.c \
 		src/map/save_map.c \
 		src/handle_shoot.c \
