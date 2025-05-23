@@ -57,7 +57,11 @@ int main(int argc, char **argv, char **env)
     if (!env || !env[0] || !getenv("DISPLAY"))
         return 84;
     if (argv[1] && strcmp(argv[1], "-h") == 0) {
-        printf("USAGE :\n\t./wolf3d (-h)\n\nDESCRIPTION :\n");
+        printf("USAGE :\n\t./wolf3d (-h, -f <file>)\n\nDESCRIPTION :\n\n"
+            "Oh no ! The Rocket team poisened some mimikyu and gastly and "
+            "threw them in a maze ! Go save (catch) them all !\nBe carefull,"
+            " the poison in their vein make them angry and violent. They "
+            "might attack you...\n");
         return 0;
     }
     srand(time(NULL));
