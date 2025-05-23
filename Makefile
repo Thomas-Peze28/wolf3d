@@ -31,6 +31,7 @@ SRC	=	src/main.c	\
 		src/menu/win.c \
 		src/menu/init_option_menu.c \
 		src/hud/display_fps.c \
+		src/hud/display_score.c \
 		src/ennemies/display_ennemies.c \
 		src/ennemies/ennemies_attack.c \
 		src/tools/move_rect.c \

@@ -113,5 +113,6 @@ void check_gain_gastly_health(game_t *game, gastly_t *gastly);
 void check_gain_mimikyu_health(game_t *game, mimikyu_t *mimikyu);
 void toggle_light(game_t *game);
 void display_win(game_t *game);
+void display_score(game_t *game);
 
 #endif /* WOLF_H */

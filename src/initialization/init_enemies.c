@@ -75,7 +75,7 @@ mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map)
     mimikyu = malloc(sizeof(mimikyu_t));
     if (!mimikyu)
         return NULL;
-    mimikyu->attack = 2;
+    mimikyu->attack = 1;
     mimikyu->aim = 10;
     mimikyu->shiny = (rand() % 5) == 0;
     mimikyu->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;

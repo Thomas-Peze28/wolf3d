@@ -26,7 +26,7 @@ sounds_t *init_sounds(void)
     sounds->background_music = sfMusic_createFromFile(
         "assets/sound/lavender_town_theme.mp3");
     sfMusic_setLoop(sounds->background_music, sfTrue);
-    sfMusic_setVolume(sounds->background_music, 1);
+    sfMusic_setVolume(sounds->background_music, 50);
     sfMusic_play(sounds->background_music);
     sounds->catched_pokemon = init_sound("assets/sound/pokemon.wav", 100);
     sounds->launched_pokeball = init_sound("assets/sound/pokeball.ogg", 50);

@@ -14,6 +14,8 @@ game_t *init_game(char *filepath)
     if (!game)
         return NULL;
     game->level = 1;
+    game->ennmies_alive = 0;
+    game->score = 0;
     game->window = init_window(sfResize | sfClose);
     game->map = init_map(filepath);
     game->player = init_player(game->map->tile_size);
