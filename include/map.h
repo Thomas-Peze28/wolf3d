@@ -35,7 +35,7 @@ typedef struct map_s {
 
 extern int map[MAP_HEIGHT][MAP_WIDTH];
 
-map_t *init_map(void);
+map_t *init_map(char *filepath);
 bool is_wall(map_t *map, int x, int y);
 tile_t ***create_tiles(int width, int height, int tile_size, int **map);
 

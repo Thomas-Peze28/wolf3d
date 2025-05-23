@@ -7,7 +7,7 @@
 
 #include "wolf.h"
 
-game_t *init_game(void)
+game_t *init_game(char *filepath)
 {
     game_t *game = malloc(sizeof(game_t));
 
@@ -15,7 +15,7 @@ game_t *init_game(void)
         return NULL;
     game->level = 1;
     game->window = init_window(sfResize | sfClose);
-    game->map = init_map();
+    game->map = init_map(filepath);
     game->player = init_player(game->map->tile_size);
     game->graphics = init_graphics(game);
     game->graphics->menu = init_menu();

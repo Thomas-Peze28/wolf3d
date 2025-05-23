@@ -31,10 +31,10 @@ void game_clock(game_t *game, shoot_t *shoot, sfClock *clock)
     }
 }
 
-int launch_game(void)
+int launch_game(char *filepath)
 {
     sfClock *clock = sfClock_create();
-    game_t *game = init_game();
+    game_t *game = init_game(filepath);
     shoot_t shoot = {0};
 
     shoot.rect = (sfIntRect){0, 0, 64, 64};
@@ -65,7 +65,11 @@ int main(int argc, char **argv, char **env)
         return 0;
     }
     srand(time(NULL));
-    generate_and_save_map();
-    launch_game();
+    if (argc == 3 && strcmp(argv[1], "-f") == 0) {
+        launch_game(argv[2]);
+    } else {
+        generate_and_save_map();
+        launch_game("map_gen.txt");
+    }
     return 0;
 }

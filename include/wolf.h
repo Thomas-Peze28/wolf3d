@@ -60,7 +60,7 @@ typedef struct game_s {
 
 int my_strcmp(char const *s1, char const *s2);
 int open_window(void);
-game_t *init_game(void);
+game_t *init_game(char *filepath);
 graphics_t *init_graphics(game_t *game);
 bool is_wall(map_t *map, int x, int y);
 void display_floor_ceilling(game_t *game);
