@@ -24,6 +24,7 @@ SRC	=	src/main.c	\
 		src/print_fps.c	\
 		src/move_player.c \
 		src/menu/display_menu.c \
+		src/menu/change_settings.c \
 		src/menu/options_menu.c \
 		src/menu/init_menu.c \
 		src/menu/game_over.c \
@@ -39,6 +40,7 @@ SRC	=	src/main.c	\
 		src/map/save_map.c \
 		src/handle_shoot.c \
 		src/handle_game_event.c \
+		src/is_shot.c \
 
 OBJ	=	$(SRC:.c=.o)
 
