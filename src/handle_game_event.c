@@ -20,8 +20,10 @@ int analyze_event(game_t *game, shoot_t *shoot)
             (sfVector2f){game->window->event.mouseMove.x,
                 game->window->event.mouseMove.y});
     }
-    if (game->window->event.type == sfEvtMouseButtonPressed)
+    if (game->window->event.type == sfEvtMouseButtonPressed) {
+        sfSound_play(game->sounds->launched_pokeball);
         shoot->shoot = 1;
+    }
     return 0;
 }
 

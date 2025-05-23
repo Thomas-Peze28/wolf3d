@@ -21,7 +21,8 @@ void game_clock(game_t *game, shoot_t *shoot, sfClock *clock)
     sfTime time_clock = sfClock_getElapsedTime(clock);
     float seconds = sfTime_asSeconds(time_clock);
 
-    set_cursor_position(game);
+    if (game->graphics->menu->options_menu->aiming_move == false)
+        set_cursor_position(game);
     handle_events(game, shoot);
     if (seconds > 0.01) {
         game_loop(game, shoot);
