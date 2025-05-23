@@ -24,7 +24,6 @@ void gastly_attack_player(game_t *game)
         if (dist >= gastly->aim)
             continue;
         game->player->health -= gastly->attack;
-        printf("Gastly attack you !\n");
     }
 }
 
@@ -45,7 +44,6 @@ void mimikyu_attack_player(game_t *game)
         if (dist >= mimikyu->aim)
             continue;
         game->player->health -= mimikyu->attack;
-        printf("Mimikyu attack you !\n");
     }
 }
 
