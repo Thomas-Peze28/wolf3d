@@ -36,6 +36,8 @@ typedef struct sounds_s {
     sfMusic *background_music;
     sfSoundBuffer *footstep_buffer;
     sfSound *footstep;
+    sfSound *catched_pokemon;
+    sfSound *launched_pokeball;
 } sounds_t;
 
 typedef struct shoot_s {
