@@ -18,6 +18,18 @@ void init_options_menu_fullscreen_btn(options_t *options_menu)
     sfText_setFillColor(options_menu->fullscreen_btn, sfYellow);
 }
 
+void init_options_aim_fullscreen_btn(options_t *options_menu)
+{
+    options_menu->aiming_btn = sfText_create();
+    sfText_setFont(options_menu->aiming_btn, options_menu->font);
+    sfText_setString(options_menu->aiming_btn, "Aim mode");
+    sfText_setCharacterSize(options_menu->aiming_btn, 60);
+    sfText_setPosition(options_menu->aiming_btn,
+        (sfVector2f){WINDOW_WIDTH / 2 - 200, 800});
+    sfText_setFillColor(options_menu->aiming_btn, sfYellow);
+    options_menu->aiming_move = false;
+}
+
 void init_options_menu_sound_slider(options_t *options_menu)
 {
     options_menu->sound_slider_bar = sfRectangleShape_create();
@@ -53,6 +65,7 @@ options_t *init_options_menu(void)
         return NULL;
     options_menu->font = sfFont_createFromFile("assets/Roboto-Black.ttf");
     init_options_menu_fullscreen_btn(options_menu);
+    init_options_aim_fullscreen_btn(options_menu);
     init_options_menu_sound_slider(options_menu);
     init_options_menu_sound_text(options_menu);
     options_menu->sound_volume = 50;
