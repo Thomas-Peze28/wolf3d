@@ -85,22 +85,24 @@ The color of the walls should vary depending on their orientation or have a text
 
 ## MAP
 The map file contains all the information about the map simulation.
-Below is a example of a map file.
+Below is a example of the first 4 lines of a map file.
 
 **Walls** are described by **1**
 **Empty spaces** are described by **0**
 Your map **must** be closed by walls
+The map must be 50*50 (if you want to change that you need to change the WIDTH and HEIGHT params in the wolf.h file)
 
 > #### ~/my_radar> cat example.txt
-> 11111111111111111111111
+> 11111111111111111111111111111111111111111111111111
 >
-> 10000000111101111100001
+> 10000000111101111100000000000000011111100000000001
 >
-> 10000000000000000000111
+> 10000000000000000000111111111000000000001111110001
 >
-> 10000000111111100000111
+> 10000000111111100000111111111000000000111011111111
 >
-> 11111111111111111111111
+> 11111111111111110001111111111100000000000011111111
+>
 
 ### USAGE
 >	./my_radar [OPTIONS]

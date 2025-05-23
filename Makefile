@@ -43,6 +43,7 @@ SRC	=	src/main.c	\
 		src/is_shot.c \
 		src/gain_health.c \
 		src/toggle_light.c \
+		src/handle_error.c
 
 OBJ	=	$(SRC:.c=.o)
 
