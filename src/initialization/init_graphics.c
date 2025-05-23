@@ -68,7 +68,8 @@ graphics_t *init_graphics(game_t *game)
     graphics->wall_rect = (sfIntRect){0, 0, 64, 64};
     if (!graphics->floor || !graphics->ceilling)
         return NULL;
-    graphics->pokeball = sfTexture_createFromFile("assets/spritesheet/pokeball.png", NULL);
+    graphics->pokeball = sfTexture_createFromFile(
+        "assets/spritesheet/pokeball.png", NULL);
     graphics->cursor = sfSprite_create();
     init_cursor(graphics);
     graphics->hud = malloc(sizeof(hud_t));

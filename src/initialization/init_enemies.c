@@ -37,7 +37,7 @@ gastly_t *init_gastly(gastly_t *gastly, int **map)
         return NULL;
     gastly->evolution = GASTLY;
     gastly->attack = 1 + ((rand() / 5) + 1) * gastly->evolution;
-    gastly->aim = 10 + (10 * gastly->evolution);
+    gastly->aim = 10 + (3 * gastly->evolution);
     gastly->shiny = (rand() % 5) == 0;
     gastly->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
     gastly->y = (rand() % MAP_HEIGHT) * TILE_SIZE + TILE_SIZE / 2;
@@ -75,7 +75,7 @@ mimikyu_t *init_mimikyu(mimikyu_t *mimikyu, int **map)
     mimikyu = malloc(sizeof(mimikyu_t));
     if (!mimikyu)
         return NULL;
-    mimikyu->attack = 10;
+    mimikyu->attack = 2;
     mimikyu->aim = 10;
     mimikyu->shiny = (rand() % 5) == 0;
     mimikyu->x = (rand() % MAP_WIDTH) * TILE_SIZE + TILE_SIZE / 2;
