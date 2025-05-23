@@ -56,6 +56,8 @@ typedef struct game_s {
     sounds_t *sounds;
     gastly_t **gastly_tab;
     mimikyu_t **mimikyu_tab;
+    int ennmies_alive;
+    int score;
 } game_t;
 
 int my_strcmp(char const *s1, char const *s2);
@@ -110,5 +112,6 @@ int change_volume(game_t *game, sfVector2i mouse);
 void check_gain_gastly_health(game_t *game, gastly_t *gastly);
 void check_gain_mimikyu_health(game_t *game, mimikyu_t *mimikyu);
 void toggle_light(game_t *game);
+void display_win(game_t *game);
 
 #endif /* WOLF_H */
