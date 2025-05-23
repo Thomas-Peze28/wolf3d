@@ -51,7 +51,7 @@ int launch_game(char *filepath)
             return 0;
         }
     }
-    sfRenderWindow_destroy(game->window->win);
+    free_game(game);
     return 0;
 }
 

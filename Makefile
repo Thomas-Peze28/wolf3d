@@ -47,7 +47,13 @@ SRC	=	src/main.c	\
 		src/is_shot.c \
 		src/gain_health.c \
 		src/toggle_light.c \
-		src/handle_error.c
+		src/handle_error.c \
+		src/destroy_game/free_game.c \
+        src/destroy_game/free_map.c \
+        src/destroy_game/free_ennemies.c \
+		src/destroy_game/free_graphics.c \
+		src/destroy_game/free_menu.c \
+		src/destroy_game/free_hud.c \
 
 OBJ	=	$(SRC:.c=.o)
 

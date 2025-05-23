@@ -9,6 +9,8 @@
 
 int free_gastly(gastly_t *gastly)
 {
+    if (!gastly)
+        return 0;
     if (gastly->texture)
         sfTexture_destroy(gastly->texture);
     if (gastly->sprite)
@@ -17,8 +19,20 @@ int free_gastly(gastly_t *gastly)
     return 0;
 }
 
+int free_gastly_tab(gastly_t **gastly_tab)
+{
+    if (!gastly_tab)
+        return 0;
+    for (int i = 0; gastly_tab[i] != NULL; i++)
+        free_gastly(gastly_tab[i]);
+    free(gastly_tab);
+    return 0;
+}
+
 int free_mimikyu(mimikyu_t *mimikyu)
 {
+    if (!mimikyu)
+        return 0;
     if (mimikyu->texture)
         sfTexture_destroy(mimikyu->texture);
     if (mimikyu->sprite)
@@ -27,16 +41,10 @@ int free_mimikyu(mimikyu_t *mimikyu)
     return 0;
 }
 
-int free_gastly_tab(gastly_t **gastly_tab)
-{
-    for (int i = 0; gastly_tab[i] != NULL; i++)
-        free_gastly(gastly_tab[i]);
-    free(gastly_tab);
-    return 0;
-}
-
 int free_mimikyu_tab(mimikyu_t **mimikyu_tab)
 {
+    if (!mimikyu_tab)
+        return 0;
     for (int i = 0; mimikyu_tab[i] != NULL; i++)
         free_mimikyu(mimikyu_tab[i]);
     free(mimikyu_tab);

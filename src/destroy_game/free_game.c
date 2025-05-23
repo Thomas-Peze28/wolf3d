@@ -7,46 +7,19 @@
 
 #include "wolf.h"
 
-int free_graphics(graphics_t *graphics)
-{
-    if (graphics->pokeball)
-        sfTexture_destroy(graphics->pokeball);
-    if (graphics->menu) {
-        free_menu(graphics->menu);
-        free(graphics->menu);
-    }
-    if (graphics->hud) {
-        free_hud(graphics->hud);
-        free(graphics->hud);
-    }
-    if (graphics->ceilling)
-        sfRectangleShape_destroy(graphics->ceilling);
-    if (graphics->floor)
-        sfRectangleShape_destroy(graphics->floor);
-    if (graphics->cursor)
-        sfSprite_destroy(graphics->cursor);
-    return 0;
-}
-
 int free_game(game_t *game)
 {
+    if (!game)
+        return 0;
+    sfRenderWindow_destroy(game->window->win);
     if (game->map)
         free_map(game->map);
-    if (game->player)
-        free_player(game->player);
-    if (game->graphics) {
+    if (game->graphics)
         free_graphics(game->graphics);
-        free(game->graphics);
-    }
-    if (game->window) {
-        free_window(game->window);
-        free(game->window);
-    }
-    if (game->sounds) {
-        free_sounds(game->sounds);
-        free(game->sounds);
-    }
-    if (game)
-        free(game);
+    if (game->gastly_tab)
+        free_gastly_tab(game->gastly_tab);
+    if (game->mimikyu_tab)
+        free_mimikyu_tab(game->mimikyu_tab);
+    free(game);
     return 0;
 }

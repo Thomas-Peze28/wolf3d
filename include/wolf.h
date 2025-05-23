@@ -115,5 +115,17 @@ void toggle_light(game_t *game);
 void display_win(game_t *game);
 void display_score(game_t *game);
 void draw_rain_particles(game_t *game, int nb);
+int free_game(game_t *game);
+int free_enemies(game_t *game);
+int free_graphics(graphics_t *graphics);
+int free_menu(menu_t *menu);
+int free_main_menu(main_t *main_menu);
+int free_options_menu(options_t *options);
+int free_hud(hud_t *hud);
+int free_window(window_t *window);
+int free_map(map_t *map);
+int free_player(player_t *player);
+int free_gastly_tab(gastly_t **gastly_tab);
+int free_mimikyu_tab(mimikyu_t **mimikyu_tab);
 
 #endif /* WOLF_H */
