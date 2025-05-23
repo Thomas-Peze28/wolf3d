@@ -39,17 +39,17 @@ void display_game_over(game_t *game)
     sfSprite *sprite = sfSprite_create();
     sfClock *clock = sfClock_create();
 
-    if (!texture || !sprite)
-        return;
     play_game_over_sound();
     sfSprite_setTexture(sprite, texture, sfTrue);
     sfSprite_setScale(sprite, (sfVector2f){1.25f, 1.08f});
     draw_game_over_screen(game, sprite);
-    while (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 5.0f) {
+    while (sfTime_asSeconds(sfClock_getElapsedTime(clock)) < 10.0f) {
         while (sfRenderWindow_pollEvent(game->window->win,
             &game->window->event)) {
             handle_game_over_event(game);
         }
+        draw_rain_particles(game, 100);
+        sfRenderWindow_display(game->window->win);
     }
     sfSprite_destroy(sprite);
     sfTexture_destroy(texture);
