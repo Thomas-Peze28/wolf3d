@@ -28,6 +28,7 @@ SRC	=	src/main.c	\
 		src/menu/options_menu.c \
 		src/menu/init_menu.c \
 		src/menu/game_over.c \
+		src/menu/rain_circles.c \
 		src/menu/win.c \
 		src/menu/init_option_menu.c \
 		src/hud/display_fps.c \

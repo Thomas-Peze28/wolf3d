@@ -114,5 +114,6 @@ void check_gain_mimikyu_health(game_t *game, mimikyu_t *mimikyu);
 void toggle_light(game_t *game);
 void display_win(game_t *game);
 void display_score(game_t *game);
+void draw_rain_particles(game_t *game, int nb);
 
 #endif /* WOLF_H */
