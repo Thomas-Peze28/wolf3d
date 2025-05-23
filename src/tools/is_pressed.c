@@ -19,7 +19,7 @@ bool is_key_pressed(sfEvent event, sfKeyCode key)
 
 bool is_mouse_clicked(sfEvent event, sfMouseButton button)
 {
-    return (event.type == sfEvtMouseButtonPressed
+    return (event.type == sfEvtMouseButtonReleased
         && event.mouseButton.button == button);
 }
 
