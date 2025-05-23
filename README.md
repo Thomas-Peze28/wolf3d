@@ -1,6 +1,6 @@
 
 # Wolfenstein3D
-![Wolfenstein3D](wolf3d.gif)
+![Wolfenstein3D](readme_assets/wolf3d.gif)
 ## Subject
 
 "This project involves creating a first-person view inside a maze. You will have to program this perspective view as well as the movement of the camera on the map. The drawing principle that you must employ is raycasting.
@@ -77,11 +77,12 @@ The color of the walls should vary depending on their orientation or have a text
 - [ ] **More complex shapes**: display and manage shapes other than squares.
 - [x] Have a **map editor**.
 
-///////////////////////////////
-
 ### PERSONAL BONUSES
 - Certain ennemies give you back health.
 - You can choose how to shoot (centered or with a visor following your mouse).
+
+### PREVIEW
+![Our_process](readme_assets/wolf3d.gif)
 
 ## MAP
 The map file contains all the information about the map simulation.
