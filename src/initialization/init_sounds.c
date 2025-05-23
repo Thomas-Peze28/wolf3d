@@ -28,7 +28,7 @@ sounds_t *init_sounds(void)
     sfMusic_setLoop(sounds->background_music, sfTrue);
     sfMusic_setVolume(sounds->background_music, 1);
     sfMusic_play(sounds->background_music);
-    sounds->catched_pokemon = init_sound("assets/sound/pokemon.ogg", 100);
+    sounds->catched_pokemon = init_sound("assets/sound/pokemon.wav", 100);
     sounds->launched_pokeball = init_sound("assets/sound/pokeball.ogg", 50);
     return sounds;
 }
