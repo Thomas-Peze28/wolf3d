@@ -14,6 +14,9 @@ void handle_key_pressed(game_t *game)
         game->player->angle -= 0.02;
     if (sfKeyboard_isKeyPressed(sfKeyRight))
         game->player->angle += 0.02;
+    if (sfKeyboard_isKeyPressed(sfKeyL))
+        game->graphics->menu->options_menu->light =
+            !game->graphics->menu->options_menu->light;
 }
 
 void game_clock(game_t *game, shoot_t *shoot, sfClock *clock)

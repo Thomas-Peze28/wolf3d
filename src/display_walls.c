@@ -7,10 +7,10 @@
 
 #include "wolf.h"
 
-sfColor calculate_wall_color(float dist, sfColor base_color)
+sfColor calculate_wall_color(float dist, sfColor base_color, bool light)
 {
     float max_distance = 150.0f;
-    float factor = 1.0 - (dist / max_distance);
+    float factor = 1.0f - (dist / max_distance);
     sfColor color = base_color;
 
     if (factor < 0.2f)
@@ -29,7 +29,8 @@ void create_wall(game_t *game, int i, float dist, float wall_height)
     sfVector2f position = {i * (game->window->mode.width / NUM_RAYS),
         (game->window->mode.height - wall_height) / 2};
     sfColor base_color = sfColor_fromRGB(150, 75, 0);
-    sfColor shaded_color = calculate_wall_color(dist, base_color);
+    sfColor shaded_color = calculate_wall_color(dist, base_color,
+        game->graphics->menu->options_menu->light);
 
     sfRectangleShape_setSize(game->player->view_field[i]->wall, size);
     sfRectangleShape_setPosition(game->player->view_field[i]->wall, position);

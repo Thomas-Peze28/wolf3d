@@ -33,12 +33,16 @@ void animate_bullet(game_t *game, shoot_t *shoot)
 void check_ennemies_shot_mouse(game_t *game)
 {
     for (int i = 0; game->gastly_tab[i] != NULL; i++) {
-        if (is_enemy_sprite_shot(game, game->gastly_tab[i]->sprite))
+        if (is_enemy_sprite_shot(game, game->gastly_tab[i]->sprite)) {
             game->gastly_tab[i]->is_alive = 0;
+            check_gain_gastly_health(game, game->gastly_tab[i]);
+        }
     }
     for (int i = 0; game->mimikyu_tab[i] != NULL; i++) {
-        if (is_enemy_sprite_shot(game, game->mimikyu_tab[i]->sprite))
+        if (is_enemy_sprite_shot(game, game->mimikyu_tab[i]->sprite)) {
             game->mimikyu_tab[i]->is_alive = 0;
+            check_gain_mimikyu_health(game, game->mimikyu_tab[i]);
+        }
     }
 }
 
@@ -46,13 +50,17 @@ void check_ennemies_shot(game_t *game)
 {
     for (int i = 0; game->gastly_tab[i] != NULL; i++) {
         if (is_enemy_shot(game, game->gastly_tab[i]->x,
-            game->gastly_tab[i]->y))
+            game->gastly_tab[i]->y)) {
             game->gastly_tab[i]->is_alive = 0;
+            check_gain_gastly_health(game, game->gastly_tab[i]);
+        }
     }
     for (int i = 0; game->mimikyu_tab[i] != NULL; i++) {
         if (is_enemy_shot(game, game->mimikyu_tab[i]->x,
-            game->mimikyu_tab[i]->y))
+            game->mimikyu_tab[i]->y)) {
             game->mimikyu_tab[i]->is_alive = 0;
+            check_gain_mimikyu_health(game, game->mimikyu_tab[i]);
+        }
     }
 }
 

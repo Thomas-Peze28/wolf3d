@@ -111,5 +111,7 @@ int is_enemy_sprite_shot(game_t *game, sfSprite *sprite);
 int is_enemy_shot(game_t *game, float ennemy_x, float ennemy_y);
 int toggle_fullscreen(game_t *game);
 int change_volume(game_t *game, sfVector2i mouse);
+void check_gain_gastly_health(game_t *game, gastly_t *gastly);
+void check_gain_mimikyu_health(game_t *game, mimikyu_t *mimikyu);
 
 #endif /* WOLF_H */
