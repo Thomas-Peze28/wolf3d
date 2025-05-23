@@ -34,7 +34,7 @@ typedef struct options_s {
     float sound_volume;
     sfText *aiming_btn;
     bool aiming_move;
-    bool light;
+    float light;
 } options_t;
 
 typedef struct menu_s {

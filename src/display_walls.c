@@ -7,9 +7,9 @@
 
 #include "wolf.h"
 
-sfColor calculate_wall_color(float dist, sfColor base_color, bool light)
+sfColor calculate_wall_color(float dist, sfColor base_color, float light)
 {
-    float max_distance = 150.0f;
+    float max_distance = light;
     float factor = 1.0f - (dist / max_distance);
     sfColor color = base_color;
 

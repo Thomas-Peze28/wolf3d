@@ -113,5 +113,6 @@ int toggle_fullscreen(game_t *game);
 int change_volume(game_t *game, sfVector2i mouse);
 void check_gain_gastly_health(game_t *game, gastly_t *gastly);
 void check_gain_mimikyu_health(game_t *game, mimikyu_t *mimikyu);
+void toggle_light(game_t *game);
 
 #endif /* WOLF_H */

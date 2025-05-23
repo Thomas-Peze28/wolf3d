@@ -24,6 +24,10 @@ int analyze_event(game_t *game, shoot_t *shoot)
         sfSound_play(game->sounds->launched_pokeball);
         shoot->shoot = 1;
     }
+    if (game->window->event.type == sfEvtKeyPressed) {
+        if (game->window->event.key.code == sfKeyL)
+            toggle_light(game);
+    }
     return 0;
 }
 

@@ -69,6 +69,6 @@ options_t *init_options_menu(void)
     init_options_menu_sound_slider(options_menu);
     init_options_menu_sound_text(options_menu);
     options_menu->sound_volume = 50;
-    options_menu->light = true;
+    options_menu->light = 150.0f;
     return options_menu;
 }
