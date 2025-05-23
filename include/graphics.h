@@ -32,6 +32,8 @@ typedef struct options_s {
     sfRectangleShape *sound_slider_bar;
     sfRectangleShape *sound_slider_cursor;
     float sound_volume;
+    sfText *aiming_btn;
+    bool aiming_move;
 } options_t;
 
 typedef struct menu_s {

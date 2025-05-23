@@ -106,5 +106,10 @@ sounds_t *init_sounds(void);
 void handle_shoot(game_t *game, shoot_t *shoot);
 void enemies_attack_player(game_t *game);
 void display_game_over(game_t *game);
+sfSound *init_sound(char *audio_name, float volume);
+int is_enemy_sprite_shot(game_t *game, sfSprite *sprite);
+int is_enemy_shot(game_t *game, float ennemy_x, float ennemy_y);
+int toggle_fullscreen(game_t *game);
+int change_volume(game_t *game, sfVector2i mouse);
 
 #endif /* WOLF_H */
